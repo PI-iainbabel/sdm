@@ -1,6 +1,53 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-50 font-sans text-slate-800 antialiased p-4 md:p-8">
+
+    <div class="max-w-7xl mx-auto space-y-6">
+        
+        <nav class="bg-white rounded-2xl shadow-sm border border-slate-150 p-2.5 flex flex-wrap gap-2 justify-center lg:justify-between items-center z-50">
+            <div class="flex items-center gap-2 px-3 py-1.5 text-emerald-800 font-bold text-xs md:text-sm font-heading">
+                <i class="fas fa-layer-group text-base text-emerald-600"></i> Dashboard
+            </div>
+            <div class="flex flex-wrap gap-1.5 justify-center">
+                <a href="https://pi-iainbabel.github.io/profil-dan-rekam-jejak-akademis-lulusan/" target="_blank" class="px-3.5 py-2 text-xs font-semibold rounded-xl text-slate-600 hover:text-emerald-700 hover:bg-slate-50 transition-all">
+                    🎓 Rekam Jejak Lulusan
+                </a>
+                <a href="https://pi-iainbabel.github.io/profil-dan-rekam-jejak-akademis-lulusan/visual-lulusan.html" target="_blank" class="px-3.5 py-2 text-xs font-semibold rounded-xl text-slate-600 hover:text-emerald-700 hover:bg-slate-50 transition-all">
+                    📊 Visual Lulusan
+                </a>
+                <a href="https://pi-iainbabel.github.io/mahasiswa/" target="_blank" class="px-3.5 py-2 text-xs font-semibold rounded-xl text-slate-600 hover:text-emerald-700 hover:bg-slate-50 transition-all">
+                    👨‍🎓 Dashboard Mahasiswa
+                </a>
+                <a href="https://pi-iainbabel.github.io/mahasiswa/prestasi-mahasiswa.html" target="_blank" class="px-3.5 py-2 text-xs font-semibold rounded-xl text-white bg-emerald-600 shadow-sm shadow-emerald-700/20 hover:bg-emerald-700 transition-all inline-flex items-center gap-1">
+                    🏅 Prestasi Mahasiswa
+                </a>
+                <a href="https://pi-iainbabel.github.io/sdm/" target="_blank" class="px-3.5 py-2 text-xs font-semibold rounded-xl text-slate-600 hover:text-emerald-700 hover:bg-slate-50 transition-all">
+                    💼 EWMP Dosen
+                </a>
+                <a href="https://pi-iainbabel.github.io/sdm/dpr.html" target="_blank" class="px-3.5 py-2 text-xs font-semibold rounded-xl text-slate-600 hover:text-emerald-700 hover:bg-slate-50 transition-all">
+                    💼 DPRPS Psikologi Islam
+                </a>
+            </div>
+        </nav>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sumber Daya Manusia (Dosen) - Prodi Psikologi Islam</title>
