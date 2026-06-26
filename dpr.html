@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sumber Daya Manusia (Dosen) - Prodi Psikologi Islam</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-50 font-sans text-slate-800 antialiased p-4 md:p-8 space-y-8">
+
+    <!-- SEKSI 1: DOSEN UTAMA (DPR) -->
+    <div class="max-w-7xl mx-auto bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
+        
+        <!-- Header Sub-Judul dengan Warna Latar & Huruf Cozy -->
+        <div class="bg-emerald-100/70 px-6 py-6 md:px-8 border-b border-emerald-200 flex flex-col md:flex-row md:justify-between md:items-center gap-4">
+            <div>
+                <span class="text-xs font-bold tracking-widest text-emerald-700 uppercase">Sumber Daya Manusia — Utama</span>
+                <h1 class="text-2xl md:text-3xl font-bold font-heading text-emerald-900 mt-1">Dosen Penghitung Rasio (DPR)</h1>
+                <p class="text-sm text-emerald-800/80 mt-1 font-medium">Program Studi Psikologi Islam • Data Terverifikasi</p>
+            </div>
+            
+            <!-- Elemen Statistik dibuat Salience -->
+            <div class="bg-white text-emerald-900 px-5 py-3 rounded-2xl border-2 border-emerald-500 shadow-md text-center md:text-right min-w-[160px] transform scale-105 transition-transform">
+                <span class="text-[11px] font-bold text-emerald-600 uppercase tracking-wider block mb-0.5">Total Dosen Tetap</span>
+                <span class="text-2xl font-black font-heading tracking-tight text-emerald-600" id="dprCount">25 <span class="text-sm font-semibold text-slate-500">Personel</span></span>
+            </div>
+        </div>
+
+        <div class="p-6 md:p-8 space-y-6">
+            <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 w-full lg:w-auto flex-1">
+                    <div class="relative">
+                        <input type="text" id="dprSearchInput" onkeyup="filterDPRTable()" placeholder="Cari nama atau keahlian..." 
+                            class="w-full bg-slate-50 border border-slate-200 text-sm rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:bg-white transition-all text-slate-700 shadow-inner">
+                    </div>
+                    <div>
+                        <select id="dprJabatanFilter" onchange="filterDPRTable()" 
+                            class="w-full bg-slate-50 border border-slate-200 text-sm rounded-xl px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:bg-white transition-all text-slate-700 shadow-sm font-medium">
+                            <option value="">-- Semua Jabatan --</option>
+                            <option value="Guru Besar">Guru Besar (Profesor)</option>
+                            <option value="Lektor Kepala">Lektor Kepala</option>
+                            <option value="Lektor">Lektor</option>
+                            <option value="Asisten Ahli">Asisten Ahli</option>
+                        </select>
+                    </div>
+                    <div>
+                        <select id="dprPendidikanFilter" onchange="filterDPRTable()" 
+                            class="w-full bg-slate-50 border border-slate-200 text-sm rounded-xl px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:bg-white transition-all text-slate-700 shadow-sm font-medium">
+                            <option value="">-- Semua Pendidikan --</option>
+                            <option value="S3">S3 (Doktor)</option>
+                            <option value="S2">S2 (Magister)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="text-xs font-medium italic bg-amber-50 text-amber-800 border border-amber-200 px-4 py-2.5 rounded-xl w-full lg:w-auto text-center lg:text-left shadow-sm">
+                    💡 Seluruh bukti dokumen dapat diklik langsung pada tabel. Gunakan filter untuk mempermudah pemeriksaan.
+                </div>
+            </div>
+
+            <div class="overflow-x-auto border border-slate-200 rounded-xl shadow-sm bg-white">
+                <table class="w-full text-left border-collapse text-sm" id="dprTable">
+                    <thead>
+                        <tr class="bg-slate-100 text-slate-700 font-heading font-semibold text-xs border-b border-slate-200">
+                            <th class="p-3.5 text-center w-14 bg-slate-200/60 font-bold text-slate-800">No</th>
+                            <th class="p-3.5">Nama Dosen</th>
+                            <th class="p-3.5 bg-emerald-50 text-emerald-950 font-bold">Pendidikan Tertinggi (Link)</th>
+                            <th class="p-3.5">Bidang Keahlian</th>
+                            <th class="p-3.5 text-center">Jabatan Akademik (Link)</th>
+                            <th class="p-3.5 text-center">Sertifikat Pendidik (Link)</th>
+                            <th class="p-3.5 text-center">Luaran DPR (Link)</th>
+                            <th class="p-3.5 text-center text-emerald-900 font-bold">Kesesuaian Inti</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100 bg-white text-slate-700" id="dprTableBody">
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Bagian Footer Statistik yang Dibuat Menonjol (Salience) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2 text-xs md:text-sm">
+                <div class="bg-slate-100 p-5 rounded-2xl border border-slate-200 space-y-2 text-slate-600 relative overflow-hidden">
+                    <div class="absolute top-0 left-0 h-full w-2 bg-emerald-500"></div>
+                    <p class="font-bold text-slate-800 flex items-center gap-1.5 text-sm">
+                        📊 Keterangan Kecocokan Kompetensi:
+                    </p>
+                    <p class="leading-relaxed">
+                        Seluruh <span class="bg-emerald-600 text-white font-extrabold px-1.5 py-0.5 rounded text-xs">25 dosen</span> penghitung rasio (<span class="bg-emerald-600 text-white font-extrabold px-1.5 py-0.5 rounded text-xs">100%</span>) memiliki kesesuaian keahlian dan rekognisi luaran yang relevan dengan pilar kompetensi inti program studi Psikologi Islam, menjamin mutu akselerasi linieritas kurikulum prodi.
+                    </p>
+                </div>
+                
+                <div class="bg-gradient-to-br from-emerald-50 to-emerald-100/50 p-5 rounded-2xl border-2 border-emerald-200 flex items-center justify-between shadow-sm">
+                    <div>
+                        <h4 class="font-bold text-emerald-900 text-sm md:text-base">Rasio Dosen Tidak Tetap (PDTT)</h4>
+                        <p class="text-xs text-emerald-700 mt-1 font-medium leading-relaxed">Persentase proporsi NDTT terhadap total keseluruhan dosen tetap.</p>
+                    </div>
+                    <div class="bg-white px-5 py-3 rounded-xl border-2 border-emerald-500 shadow-md transform scale-105">
+                        <span class="text-3xl font-black font-heading text-emerald-600 tracking-tight">24%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SEKSI 2: DOSEN PENDUKUNG (DTT) -->
+    <div class="max-w-7xl mx-auto bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
+        
+        <!-- Header Sub-Judul dengan Warna Latar & Huruf Cozy -->
+        <div class="bg-amber-100/70 px-6 py-6 md:px-8 border-b border-amber-200 flex flex-col md:flex-row md:justify-between md:items-center gap-4">
+            <div>
+                <span class="text-xs font-bold tracking-widest text-amber-800 uppercase">Sumber Daya Manusia — Pendukung</span>
+                <h2 class="text-2xl md:text-3xl font-bold font-heading text-amber-950 mt-1">Dosen Tidak Tetap (DTT) Kategori Khusus</h2>
+                <p class="text-sm text-amber-900/85 mt-1 font-medium">Dosen Luar Biasa (DLB) Pengampu Keahlian Spesifik Metodologi & Praktis</p>
+            </div>
+            
+            <!-- Elemen Statistik dibuat Salience -->
+            <div class="bg-white text-amber-900 px-5 py-3 rounded-2xl border-2 border-amber-600 shadow-md text-center md:text-right min-w-[160px] transform scale-105 transition-transform">
+                <span class="text-[11px] font-bold text-amber-700 uppercase tracking-wider block mb-0.5">Total Dosen Tidak Tetap</span>
+                <span class="text-2xl font-black font-heading tracking-tight text-amber-700" id="dttCount">6 <span class="text-sm font-semibold text-slate-500">Personel</span></span>
+            </div>
+        </div>
+
+        <div class="p-6 md:p-8 space-y-6">
+            <div class="flex flex-col sm:flex-row justify-between items-center gap-4 w-full">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full sm:w-auto flex-1">
+                    <div class="relative">
+                        <input type="text" id="dttSearchInput" onkeyup="filterDTTTable()" placeholder="Cari nama atau keahlian..." 
+                            class="w-full bg-slate-50 border border-slate-200 text-sm rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-amber-600 focus:bg-white transition-all text-slate-700 shadow-inner">
+                    </div>
+                    <div>
+                        <select id="dttPendidikanFilter" onchange="filterDTTTable()" 
+                            class="w-full bg-slate-50 border border-slate-200 text-sm rounded-xl px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-amber-600 focus:bg-white transition-all text-slate-700 shadow-sm font-medium">
+                            <option value="">-- Semua Pendidikan --</option>
+                            <option value="S3">S3 (Doktor)</option>
+                            <option value="S2">S2 (Magister)</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <!-- Statistik Ringkas Dibuat Salience -->
+                <div class="text-xs font-bold bg-emerald-50 text-emerald-900 border-2 border-emerald-500 px-4 py-2.5 rounded-xl w-full sm:w-auto text-center shadow-sm flex items-center justify-center gap-1.5">
+                    ✔️ Kesesuaian Kompetensi Keahlian DTT: <span class="bg-emerald-600 text-white font-black px-2 py-0.5 rounded text-xs tracking-wide">100% Sesuai</span>
+                </div>
+            </div>
+
+            <div class="overflow-x-auto border border-slate-200 rounded-xl shadow-sm bg-white">
+                <table class="w-full text-left border-collapse text-sm" id="dttTable">
+                    <thead>
+                        <tr class="bg-slate-100 text-slate-700 font-heading font-semibold text-xs border-b border-slate-200">
+                            <th class="p-3.5 text-center w-14 bg-slate-200/60 font-bold text-slate-800">No</th>
+                            <th class="p-3.5">Nama Dosen</th>
+                            <th class="p-3.5 bg-amber-50/70 text-amber-950 font-bold">Pendidikan Tertinggi</th>
+                            <th class="p-3.5">Bidang Keahlian Utama</th>
+                            <th class="p-3.5 text-center">Jabatan Akademik</th>
+                            <th class="p-3.5 text-center">Sertifikat Pendidik</th>
+                            <th class="p-3.5 text-center">Rekognisi Luaran/Keahlian (Link)</th>
+                            <th class="p-3.5 text-center text-emerald-900 font-bold">Kesesuaian Inti</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100 bg-white text-slate-700" id="dttTableBody">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Dataset 1: Dosen Penghitung Rasio (DPR)
+        const dprDataset = [
+            { no: 1, nama: "AISYAH PRATIWI, M.Pd", s3: "S2 Pendidikan Bahasa Inggris", s3Link: "https://drive.google.com/drive/folders/1MIlc_Ety5Yf2M8dSclMBzivq1jAu9vtK?usp=drive_link", keahlian: "Pendidikan Bahasa Inggris", jabatan: "Lektor", jabatanLink: "https://drive.google.com/file/d/1BhVNDeyeydMuqSU8tsB-GktXN8tXWn7H/view?usp=drive_link", serdos: "-", serdosLink: "", luaran: "Bukti", luaranLink: "https://drive.google.com/drive/u/1/folders/1cI0kRe3dQeZjPcdxCy77t5bjjYEyzdoV", sesuai: "√" },
+            { no: 2, nama: "AL FAKHRI ZAKIRMAN, M.A", s3: "S2 Hukum Islam", s3Link: "https://drive.google.com/drive/u/1/folders/17eFjyT4kyY6rsTqRurPCoAXeuwy1Yl0f", keahlian: "Ushul Fiqh (Pengampu Kajian Psikologis Fiqh)", jabatan: "Lektor", jabatanLink: "https://drive.google.com/drive/u/1/folders/17eFjyT4kyY6rsTqRurPCoAXeuwy1Yl0f", serdos: "192104217434", serdosLink: "https://drive.google.com/drive/u/1/folders/17eFjyT4kyY6rsTqRurPCoAXeuwy1Yl0f", luaran: "Bukti", luaranLink: "https://drive.google.com/drive/u/1/folders/1sONOqB1BgNBXxQGBZU9Rz9RMcR6SyqDO", sesuai: "√" },
+            { no: 3, nama: "AMRULLAH, M.S.I", s3: "S2 Studi Islam (Ilmu Dakwah)", s3Link: "https://drive.google.com/drive/u/1/folders/1NU-1R_fsU17aSIcf0daVaK46ZqWLlrrC", keahlian: "Dakwah / Komunikasi Islam", jabatan: "Asisten Ahli", jabatanLink: "https://drive.google.com/drive/u/1/folders/1NU-1R_fsU17aSIcf0daVaK46ZqWLlrrC", serdos: "192104816862", serdosLink: "https://drive.google.com/drive/u/1/folders/1NU-1R_fsU17aSIcf0daVaK46ZqWLlrrC", luaran: "Bukti", luaranLink: "https://drive.google.com/drive/u/1/folders/1GRHQyZJO64xBeRdpcyBZ0xuDlfhL-zMX", sesuai: "√" },
+            { no: 4, nama: "ATIK RAHMANIYAR, M.Pd", s3: "S2 Pendidikan", s3Link: "https://drive.google.com/drive/u/1/folders/1D97Tp6_8o6_QT7VdgeERjpT9A2CqjVlA", keahlian: "Pendidikan Bahasa Indonesia", jabatan: "Asisten Ahli", jabatanLink: "https://drive.google.com/drive/u/1/folders/1D97Tp6_8o6_QT7VdgeERjpT9A2CqjVlA", serdos: "242104819203", serdosLink: "https://drive.google.com/drive/u/1/folders/1D97Tp6_8o6_QT7VdgeERjpT9A2CqjVlA", luaran: "Bukti", luaranLink: "https://drive.google.com/drive/u/1/folders/1NvjpLBxz67lFo3dQ0KUgTMFF9mAQwyBZ", sesuai: "√" },
+            { no: 5, nama: "BASRI, M.A", s3: "S2 Interdisciplinary Islamic Studies", s3Link: "https://drive.google.com/drive/u/1/folders/1IbDYR1lXmw9Xvh0bc0N_lmvnxKl73VCt", keahlian: "Sosiologi / Sosial", jabatan: "Lektor Kepala", jabatanLink: "https://drive.google.com/drive/u/1/folders/1IbDYR1lXmw9Xvh0bc0N_lmvnxKl73VCt", serdos: "92104802611", serdosLink: "https://drive.google.com/drive/u/1/folders/1IbDYR1lXmw9Xvh0bc0N_lmvnxKl73VCt", luaran: "Bukti", luaranLink: "https://drive.google.com/drive/u/1/folders/1U-0wWy3u_rTmui0Q1H8wapDRaGIScxya", sesuai: "√" },
+            { no: 6, nama: "CHITRA FRAGHINI, M.Psi., Psikolog", s3: "S2 Psikologi Profesi", s3Link: "https://drive.google.com/drive/u/1/folders/1najR_NhZXjtEVRACkaO2AtibzbztZ-tN", keahlian: "Ilmu Psikologi / PIO", jabatan: "Asisten Ahli", jabatanLink: "https://drive.google.com/drive/u/1/folders/1najR_NhZXjtEVRACkaO2AtibzbztZ-tN", serdos: "252104829002", serdosLink: "https://drive.google.com/drive/u/1/folders/1najR_NhZXjtEVRACkaO2AtibzbztZ-tN", luaran: "Bukti", luaranLink: "https://drive.google.com/drive/u/1/folders/1do5FCsDCyx3MsD1Z4FHs1ilhkUVbjh_1", sesuai: "√" },
+            { no: 7, nama: "DIAH MEITIKASARI, M.Si", s3: "S2 Sosiologi", s3Link: "https://drive.google.com/drive/u/1/folders/1uVAO98sHCMG4T_ZfTl8aIJucNM2CEawq", keahlian: "Ilmu Sosiologi", jabatan: "Lektor", jabatanLink: "https://drive.google.com/drive/u/1/folders/1najR_NhZXjtEVRACkaO2AtibzbztZ-tN", serdos: "242104819214", serdosLink: "https://drive.google.com/drive/u/1/folders/1uVAO98sHCMG4T_ZfTl8aIJucNM2CEawq", luaran: "Bukti", luaranLink: "https://drive.google.com/drive/u/1/folders/1V0VNbRzdCsEFoQ32aP6WBZtjGJexkb5F", sesuai: "√" },
+            { no: 8, nama: "Dr. DINAR PRATAMA, M.Pd", s3: "S3 Pendidikan Agama Islam", s3Link: "https://drive.google.com/drive/u/1/folders/1zJLJZKSGfjKnd7Ig6_ncIXONciud4ATH", keahlian: "Pengukuran & Evaluasi / Psikometri", jabatan: "Lektor", jabatanLink: "https://drive.google.com/drive/u/1/folders/1zJLJZKSGfjKnd7Ig6_ncIXONciud4ATH", serdos: "222104818301", serdosLink: "https://drive.google.com/drive/u/1/folders/1zJLJZKSGfjKnd7Ig6_ncIXONciud4ATH", luaran: "Bukti", luaranLink: "https://drive.google.com/drive/u/1/folders/191ygU3eAarDL1frPnZizpmJaXDlGfUOd", sesuai: "√" },
+            { no: 9, nama: "GUSTIN, M.Pd", s3: "S2 Pendidikan IPS", s3Link: "https://drive.google.com/drive/u/1/folders/1w2WNjqr1EaNcoL4a0id-cFq7OZJfAoBl", keahlian: "Ilmu Pendidikan IPS", jabatan: "Lektor", jabatanLink: "https://drive.google.com/drive/u/1/folders/1w2WNjqr1EaNcoL4a0id-cFq7OZJfAoBl", serdos: "242104819182", serdosLink: "https://drive.google.com/drive/u/1/folders/1w2WNjqr1EaNcoL4a0id-cFq7OZJfAoBl", luaran: "Bukti", luaranLink: "https://drive.google.com/drive/u/1/folders/1OLtNXqZQ4i2jK6QpFRhgOWV6LvrkmORG", sesuai: "√" },
+            { no: 10, nama: "Prof. Dr. IRAWAN, M.S.I", s3: "S3 Pengkajian Islam", s3Link: "https://drive.google.com/drive/u/1/folders/18skiahCncadqHSBIOfRt7NLf3LPqQ4n_", keahlian: "Pemikiran Islam Indonesia", jabatan: "Guru Besar", jabatanLink: "https://drive.google.com/drive/u/1/folders/18skiahCncadqHSBIOfRt7NLf3LPqQ4n_", serdos: "102104807072", serdosLink: "https://drive.google.com/drive/u/1/folders/18skiahCncadqHSBIOfRt7NLf3LPqQ4n_", luaran: "Bukti", luaranLink: "https://drive.google.com/drive/u/1/folders/1NNP0NvJjWM16esvk6sg0pULWYmAePGfr", sesuai: "√" },
+            { no: 11, nama: "ISKANDI, M.Pd.I", s3: "S2 Pendidikan Islam", s3Link: "https://drive.google.com/drive/u/1/folders/1sWLveTZmOExt30Sgjk5wPDOpJLBatz3i", keahlian: "Pendidikan Islam", jabatan: "Lektor", jabatanLink: "https://drive.google.com/drive/u/1/folders/1sWLveTZmOExt30Sgjk5wPDOpJLBatz3i", serdos: "192104816857", serdosLink: "https://drive.google.com/drive/u/1/folders/1sWLveTZmOExt30Sgjk5wPDOpJLBatz3i", luaran: "Bukti", luaranLink: "https://drive.google.com/drive/u/1/folders/1svJXj8a0ivAhYtMBnlKLWArqaxss7zmW", sesuai: "√" },
+            { no: 12, nama: "MURSYIDUL WILDAN, M.H", s3: "S2 Hukum", s3Link: "https://drive.google.com/drive/u/1/folders/1An89qy6l7lR7JMuOobtosMW3E5kiEjG1", keahlian: "Ilmu Hukum", jabatan: "Lektor", jabatanLink: "https://drive.google.com/drive/u/1/folders/1An89qy6l7lR7JMuOobtosMW3E5kiEjG1", serdos: "242104819202", serdosLink: "https://drive.google.com/drive/u/1/folders/1An89qy6l7lR7JMuOobtosMW3E5kiEjG1", luaran: "Bukti", luaranLink: "https://drive.google.com/drive/u/1/folders/1I0ZyZJeCuApdvzWBEiC3QFbingiwN_oQ", sesuai: "√" },
+            { no: 13, nama: "MUSA, M.Kom.I", s3: "S2 Komunikasi Islam", s3Link: "https://drive.google.com/drive/u/1/folders/1rzGzd0xqSKf4kQ_cLwhzKfjPPg5E2-ff", keahlian: "Ilmu Pengembangan Masyarakat Islam", jabatan: "Lektor", jabatanLink: "https://drive.google.com/drive/u/1/folders/1rzGzd0xqSKf4kQ_cLwhzKfjPPg5E2-ff", serdos: "192104816861", serdosLink: "https://drive.google.com/drive/u/1/folders/1rzGzd0xqSKf4kQ_cLwhzKfjPPg5E2-ff", luaran: "Bukti", luaranLink: "https://drive.google.com/drive/u/1/folders/1AvEPMJOXSbQP5wvgzrXAFsiAg_aBCvT-", sesuai: "√" },
+            { no: 14, nama: "OKTARIZAL DRIANUS, M.Psi", s3: "S2 Sains Psikologi", s3Link: "https://drive.google.com/drive/u/1/folders/130DOHMkZpWzlXK2NO9iQkJm0ySzmk87N", keahlian: "Ilmu Psikologi", jabatan: "Lektor", jabatanLink: "https://drive.google.com/drive/u/1/folders/130DOHMkZpWzlXK2NO9iQkJm0ySzmk87N", serdos: "232104819699", serdosLink: "https://drive.google.com/drive/u/1/folders/130DOHMkZpWzlXK2NO9iQkJm0ySzmk87N", luaran: "Bukti", luaranLink: "https://drive.google.com/drive/u/1/folders/16A3VEVNDd48ufk423X9UMbHiNtATKi2v", sesuai: "√" },
+            { no: 15, nama: "PEBRI YANASARI, M.A", s3: "S2 Interdisciplinary Islamic Studies", s3Link: "#", keahlian: "Ilmu Kesejahteraan Sosial", jabatan: "Lektor", jabatanLink: "#", serdos: "232104819694", serdosLink: "#", luaran: "Bukti", luaranLink: "#", sesuai: "√" },
+            { no: 16, nama: "PRIMALITA PUTRI DISTINA, M.Psi., Psikolog", s3: "S2 Psikologi Profesi", s3Link: "https://drive.google.com/drive/u/1/folders/1IEAIlyadDGzTyER3kmB7OZ9eHBgH5OEr", keahlian: "Ilmu Psikologi Pendidikan", jabatan: "Lektor", jabatanLink: "https://drive.google.com/drive/u/1/folders/1IEAIlyadDGzTyER3kmB7OZ9eHBgH5OEr", serdos: "252104828997", serdosLink: "https://drive.google.com/drive/u/1/folders/1IEAIlyadDGzTyER3kmB7OZ9eHBgH5OEr", luaran: "Bukti", luaranLink: "https://drive.google.com/drive/u/1/folders/18WPGGTo_1FeuqPuDUKgbZPacGDaukVqg", sesuai: "√" },
+            { no: 17, nama: "RAFLES ABDI KUSUMA, M.A", s3: "S2 Ilmu Komunikasi", s3Link: "https://drive.google.com/drive/u/1/folders/12GZkpGJ0OdK8lpg319_aOLj4IG2N2vBH", keahlian: "Ilmu Komunikasi", jabatan: "Lektor", jabatanLink: "https://drive.google.com/drive/u/1/folders/12GZkpGJ0OdK8lpg319_aOLj4IG2N2vBH", serdos: "242104819189", serdosLink: "https://drive.google.com/drive/u/1/folders/12GZkpGJ0OdK8lpg319_aOLj4IG2N2vBH", luaran: "Bukti", luaranLink: "https://drive.google.com/drive/u/1/folders/15CH3GFPbIltKPUYE6jtyq_ByJ-KW8mTy", sesuai: "√" },
+            { no: 18, nama: "Prof. Dr. RUSYDI SULAIMAN, M.Ag", s3: "S3 Pengkajian Islam", s3Link: "https://drive.google.com/drive/u/1/folders/1ULPc4IUltm213upykW2NVJG54bU926DQ", keahlian: "Integrasi Keilmuan / Sejarah Islam", jabatan: "Guru Besar", jabatanLink: "https://drive.google.com/drive/u/1/folders/1ULPc4IUltm213upykW2NVJG54bU926DQ", serdos: "92102602551", serdosLink: "https://drive.google.com/drive/u/1/folders/1ULPc4IUltm213upykW2NVJG54bU926DQ", luaran: "Bukti", luaranLink: "https://drive.google.com/drive/u/1/folders/1OLtNXqZQ4i2jK6QpFRhgOWV6LvrkmORG", sesuai: "√" },
+            { no: 19, nama: "SISKA DWI PARAMITHA, M.Psi, Psikolog", s3: "S2 Psikologi Profesi", s3Link: "https://drive.google.com/drive/u/1/folders/1Sh0_ks1ilo6j_6Od33U_jo5Zv8NG9OY6", keahlian: "Psikologi Perkembangan", jabatan: "Asisten Ahli", jabatanLink: "https://drive.google.com/drive/u/1/folders/1Sh0_ks1ilo6j_6Od33U_jo5Zv8NG9OY6", serdos: "192104816858", serdosLink: "https://drive.google.com/drive/u/1/folders/1Sh0_ks1ilo6j_6Od33U_jo5Zv8NG9OY6", luaran: "Bukti", luaranLink: "https://drive.google.com/drive/u/1/folders/1kVhEHXj6yRneQE2OK6KpgF8GSjQQABma", sesuai: "√" },
+            { no: 20, nama: "Dr. SYARIFUDDIN IDRIS, M.Pd", s3: "S3 Pendidikan Islam", s3Link: "https://drive.google.com/drive/u/1/folders/1GqJle0Ss9NvB4bObbXOETjCo4hFJeHeU", keahlian: "Integrasi Keilmuan / Kurikulum", jabatan: "Lektor", jabatanLink: "https://drive.google.com/drive/u/1/folders/1GqJle0Ss9NvB4bObbXOETjCo4hFJeHeU", serdos: "192191017569", serdosLink: "https://drive.google.com/drive/u/1/folders/1GqJle0Ss9NvB4bObbXOETjCo4hFJeHeU", luaran: "Bukti", luaranLink: "https://drive.google.com/drive/u/1/folders/1urHQxSAZvjdqndtTu5X96EYc9CulbyaT", sesuai: "√" },
+            { no: 21, nama: "WAHYU KURNIAWAN, M.Psi., Psikolog", s3: "S2 Psikologi Profesi", s3Link: "https://drive.google.com/drive/u/1/folders/12tg-BjCv305GQiKTXI4JUIHpRzjba5UL", keahlian: "Ilmu Psikologi Pendidikan", jabatan: "Lektor", jabatanLink: "https://drive.google.com/drive/u/1/folders/12tg-BjCv305GQiKTXI4JUIHpRzjba5UL", serdos: "252104829010", serdosLink: "https://drive.google.com/drive/u/1/folders/12tg-BjCv305GQiKTXI4JUIHpRzjba5UL", luaran: "Bukti", luaranLink: "https://drive.google.com/drive/u/1/folders/1pOlqY_hEey-jMoInsQwdZ4aAgcwd1qsr", sesuai: "√" },
+            { no: 22, nama: "YANDI HAFIZALLAH, M.A", s3: "S2 Interdisciplinary Islamic Studies", s3Link: "https://drive.google.com/drive/u/1/folders/1BYbagng_jYkNKFLDbC0Q9EwWEie1B3hZ", keahlian: "Psikologi Islam", jabatan: "Asisten Ahli", jabatanLink: "https://drive.google.com/drive/u/1/folders/1BYbagng_jYkNKFLDbC0Q9EwWEie1B3hZ", serdos: "252104829005", serdosLink: "https://drive.google.com/drive/u/1/folders/1BYbagng_jYkNKFLDbC0Q9EwWEie1B3hZ", luaran: "Bukti", luaranLink: "https://drive.google.com/drive/u/1/folders/1gUxEFfZJqZ2YUvNjFWZlxsxwC2OcMu2t", sesuai: "√" },
+            { no: 23, nama: "Prof. Dr. ZAPRULKHAN, M.S.I", s3: "S3 Filsafat Islam", s3Link: "https://drive.google.com/drive/u/1/folders/10XoRon-7sibtc57QhP3E8_rEE6PfMbFh", keahlian: "Filsafat Agama / Psikologi Tasawuf", jabatan: "Guru Besar", jabatanLink: "https://drive.google.com/drive/u/1/folders/10XoRon-7sibtc57QhP3E8_rEE6PfMbFh", serdos: "122104810578", serdosLink: "https://drive.google.com/drive/u/1/folders/10XoRon-7sibtc57QhP3E8_rEE6PfMbFh", luaran: "Bukti", luaranLink: "https://drive.google.com/drive/u/1/folders/1ivkJT2IdbgLq6M7xePBwB_hK0foeMt6G", sesuai: "√" },
+            { no: 24, nama: "Prof. Dr. ZAYADI, M.Ag", s3: "S3 Studi Islam", s3Link: "https://drive.google.com/drive/u/1/folders/1471yfDJl9aPozWaylztGK8IrkSSVZ3Vt", keahlian: "Ilmu Kalam", jabatan: "Guru Besar", jabatanLink: "https://drive.google.com/drive/u/1/folders/1471yfDJl9aPozWaylztGK8IrkSSVZ3Vt", serdos: "102102806401", serdosLink: "https://drive.google.com/drive/u/1/folders/1471yfDJl9aPozWaylztGK8IrkSSVZ3Vt", luaran: "Bukti", luaranLink: "https://drive.google.com/drive/u/1/folders/1NNP0NvJjWM16esvk6sg0pULWYmAePGfr", sesuai: "√" },
+            { no: 25, nama: "ZULKARNAIN, M.A.", s3: "S2 Interdisciplinary Islamic Studies", s3Link: "https://drive.google.com/drive/u/1/folders/124FS4sur2qCsniEvnJYr0nikJ27kqjFA", keahlian: "Psikologi Islam", jabatan: "Lektor", jabatanLink: "https://drive.google.com/drive/u/1/folders/124FS4sur2qCsniEvnJYr0nikJ27kqjFA", serdos: "242104819209", serdosLink: "https://drive.google.com/drive/u/1/folders/124FS4sur2qCsniEvnJYr0nikJ27kqjFA", luaran: "Bukti", luaranLink: "https://drive.google.com/drive/u/1/folders/1MNUB6BcEc3TjqBbIrsvtU_tFbkJKfi7I", sesuai: "√" }
+        ];
+
+        // Dataset 2: Dosen Tidak Tetap (DTT)
+        const dttDataset = [
+            { no: 1, nama: "Wardiansyah Putra, M.Psi., Psikolog", s2: "S2 Psikologi Profesi", keahlian: "Psikologi Eksperimen & Konstruksi Alat Ukur Psikologi", jabatan: "Dosen Luar Biasa", serdos: "-", luaran: "DLB-link", luaranLink: "https://drive.google.com/drive/u/1/folders/1HOC8D53_t2zsZ4JTdMhuGXD9p300mF39", sesuai: "√" },
+            { no: 2, nama: "Siti Zuliani, M.Si", s2: "S2 Magister Psikologi", keahlian: "Metode Penelitian Psikologi & Psikometri", jabatan: "Dosen Luar Biasa", serdos: "-", luaran: "DLB-link", luaranLink: "https://drive.google.com/drive/u/1/folders/12B732TIbwawkoD5SdyYNr0rR6_sgAMUb", sesuai: "√" },
+            { no: 3, nama: "Nikki Septiyanti, M.Psi., Psikolog", s2: "S2 Psikologi Profesi", keahlian: "Psikologi Industri dan Organisasi (PIO)", jabatan: "Dosen Luar Biasa", serdos: "-", luaran: "DLB-link", luaranLink: "https://drive.google.com/drive/u/1/folders/1305zfezWJa58MsRZBLFnzyeRqR6TyQ9Q", sesuai: "√" },
+            { no: 4, nama: "Afdila Ilham Isma, M.Psi", s2: "S2 Psikologi", keahlian: "Ilmu Psikologi", jabatan: "Dosen Luar Biasa", serdos: "-", luaran: "DLB-link", luaranLink: "https://drive.google.com/drive/u/1/folders/1fa1fvr9Y2OoHjW--aHqd-ycDSezRWV2a", sesuai: "√" },
+            { no: 5, nama: "Diah Arum Kartikasari, M.Pd", s2: "S2 Pendidikan", keahlian: "Pengukuran dan Statistika", jabatan: "Dosen Luar Biasa", serdos: "-", luaran: "DLB-link", luaranLink: "https://drive.google.com/drive/u/1/folders/1KlaqSKUh6vpiKSXxEgVrPpv3hKaCnvSa", sesuai: "√" },
+            { no: 6, nama: "Eri Yudhani, M.Psi., Psikolog", s2: "S2 Psikologi Profesi", keahlian: "Psikologi Klinis", jabatan: "Dosen Luar Biasa", serdos: "-", luaran: "DLB-link", luaranLink: "https://drive.google.com/drive/u/1/folders/1a_LspmyjPFX5s6XhzcBUhC7ay-1tFeZy", sesuai: "√" }
+        ];
+
+        // POPULATE TABEL DPR
+        function populateDPRTable(data) {
+            const tbody = document.getElementById('dprTableBody');
+            tbody.innerHTML = '';
+            
+            // Render Badge Counter dengan Penekanan Salience
+            document.getElementById('dprCount').innerHTML = `<span class="bg-emerald-600 text-white font-extrabold px-2.5 py-0.5 rounded shadow-sm">${data.length}</span> <span class="text-xs font-semibold text-slate-500 ml-1">Personel</span>`;
+
+            if (data.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="8" class="p-8 text-center text-slate-400 italic bg-white">Tidak ada data dosen yang sesuai dengan kriteria filter.</td></tr>`;
+                return;
+            }
+
+            data.forEach((row, index) => {
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-50/80 transition-colors border-b border-slate-100 text-xs md:text-sm";
+                
+                // Salience pada Nomor Urut Tabel
+                const numBox = `<span class="bg-slate-200 text-slate-800 px-2 py-0.5 rounded-md font-bold font-mono shadow-inner">${index + 1}</span>`;
+
+                // Salience pada Angka Nomor Sertifikat Pendidik
+                const serdosContent = row.serdos === "-" 
+                    ? `<span class="text-slate-400 font-mono text-xs">-</span>` 
+                    : `<a href="${row.serdosLink}" target="_blank" class="inline-flex items-center gap-1 bg-amber-50 hover:bg-amber-100 text-amber-900 font-bold font-mono text-[11px] px-2.5 py-1 rounded-lg transition-all border-2 border-amber-400 shadow-sm">🪪 ${row.serdos}</a>`;
+
+                let jafungColor = "bg-slate-100 text-slate-700 border-slate-200";
+                if(row.jabatan.includes("Guru Besar")) jafungColor = "bg-amber-100 text-amber-900 border-amber-300 font-bold";
+                if(row.jabatan.includes("Lektor Kepala")) jafungColor = "bg-purple-100 text-purple-900 border-purple-300 font-bold";
+
+                tr.innerHTML = `
+                    <td class="p-3 text-center">${numBox}</td>
+                    <td class="p-3 font-semibold text-slate-800">${row.nama}</td>
+                    <td class="p-3 bg-emerald-50/20">
+                        <a href="${row.s3Link}" target="_blank" class="inline-flex items-center text-emerald-900 hover:text-emerald-700 hover:underline font-semibold">🎓 ${row.s3}</a>
+                    </td>
+                    <td class="p-3 text-slate-600 font-medium">${row.keahlian}</td>
+                    <td class="p-3 text-center">
+                        <a href="${row.jabatanLink}" target="_blank" class="inline-flex items-center gap-1 ${jafungColor} hover:opacity-90 text-[11px] px-2.5 py-1 rounded-md transition-all border shadow-sm">💼 ${row.jabatan}</a>
+                    </td>
+                    <td class="p-3 text-center">${serdosContent}</td>
+                    <td class="p-3 text-center">
+                        <a href="${row.luaranLink}" target="_blank" class="inline-flex items-center gap-1 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 font-bold px-2.5 py-1 rounded-md transition-all border border-emerald-300 shadow-inner">📁 ${row.luaran}</a>
+                    </td>
+                    <td class="p-3 text-center text-emerald-700 font-black bg-emerald-100/40 text-sm">${row.sesuai}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // POPULATE TABEL DTT
+        function populateDTTTable(data) {
+            const tbody = document.getElementById('dttTableBody');
+            tbody.innerHTML = '';
+
+            // Render Badge Counter dengan Penekanan Salience
+            document.getElementById('dttCount').innerHTML = `<span class="bg-amber-600 text-white font-extrabold px-2.5 py-0.5 rounded shadow-sm">${data.length}</span> <span class="text-xs font-semibold text-slate-500 ml-1">Personel</span>`;
+
+            if (data.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="8" class="p-8 text-center text-slate-400 italic bg-white">Tidak ada data dosen yang sesuai dengan kriteria filter.</td></tr>`;
+                return;
+            }
+
+            data.forEach((row, index) => {
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-50/80 transition-colors border-b border-slate-100 text-xs md:text-sm";
+
+                // Salience pada Nomor Urut Tabel DTT
+                const numBox = `<span class="bg-slate-200 text-slate-800 px-2 py-0.5 rounded-md font-bold font-mono shadow-inner">${index + 1}</span>`;
+
+                tr.innerHTML = `
+                    <td class="p-3 text-center">${numBox}</td>
+                    <td class="p-3 font-semibold text-slate-800">${row.nama}</td>
+                    <td class="p-3 bg-amber-50/20 text-slate-800 font-semibold">🎓 ${row.s2}</td>
+                    <td class="p-3 text-slate-600 font-medium">${row.keahlian}</td>
+                    <td class="p-3 text-center">
+                        <span class="inline-flex items-center bg-amber-50 text-amber-900 text-[11px] font-bold px-2.5 py-1 rounded-md border border-amber-200 shadow-sm">💼 ${row.jabatan}</span>
+                    </td>
+                    <td class="p-3 text-center text-slate-400 font-mono text-xs">${row.serdos}</td>
+                    <td class="p-3 text-center">
+                        <a href="${row.luaranLink}" target="_blank" class="inline-flex items-center gap-1 bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold px-2.5 py-1 rounded-md transition-all border border-slate-300 text-xs shadow-sm">🔗 ${row.luaran}</a>
+                    </td>
+                    <td class="p-3 text-center text-emerald-700 font-black bg-emerald-100/40 text-sm">${row.sesuai}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // MULTI-FILTER COMBINED UNTUK TABEL DPR
+        function filterDPRTable() {
+            const searchVal = document.getElementById('dprSearchInput').value.toLowerCase();
+            const jabatanVal = document.getElementById('dprJabatanFilter').value;
+            const pendidikanVal = document.getElementById('dprPendidikanFilter').value;
+
+            const filtered = dprDataset.filter(item => {
+                const matchesSearch = item.nama.toLowerCase().includes(searchVal) || item.keahlian.toLowerCase().includes(searchVal);
+                const matchesJabatan = jabatanVal === "" || item.jabatan === jabatanVal;
+                const matchesPendidikan = pendidikanVal === "" || item.s3.startsWith(pendidikanVal);
+                
+                return matchesSearch && matchesJabatan && matchesPendidikan;
+            });
+            
+            populateDPRTable(filtered);
+        }
+
+        // MULTI-FILTER COMBINED UNTUK TABEL DTT
+        function filterDTTTable() {
+            const searchVal = document.getElementById('dttSearchInput').value.toLowerCase();
+            const pendidikanVal = document.getElementById('dttPendidikanFilter').value;
+
+            const filtered = dttDataset.filter(item => {
+                const matchesSearch = item.nama.toLowerCase().includes(searchVal) || item.keahlian.toLowerCase().includes(searchVal);
+                const matchesPendidikan = pendidikanVal === "" || item.s2.startsWith(pendidikanVal);
+                
+                return matchesSearch && matchesPendidikan;
+            });
+            
+            populateDTTTable(filtered);
+        }
+
+        // INISIALISASI SAAT HALAMAN SELESAI DIMUAT
+        document.addEventListener("DOMContentLoaded", () => {
+            populateDPRTable(dprDataset);
+            populateDTTTable(dttDataset);
+        });
+    </script>
+</body>
+</html>
