@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Publikasi Dosen — DPRPS Psikologi Islam</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com">
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js">
+    </script>
+
+    <!-- ECharts -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js">
+    </script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        navy: {
+                            50: '#E8EDF8', 100: '#C5D2F0', 200: '#9DB5E8',
+                            300: '#6F95E0', 400: '#4F7FD8', 500: '#2A5CC4',
+                            600: '#1A3F8F', 700: '#122B6A', 800: '#0B1D45',
+                            900: '#060F28', 950: '#030714',
+                        },
+                        gold: '#D4AF37',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #060F28;
+            color: #e2e8f0;
+            font-family: 'Inter', sans-serif;
+        }
+        .glass-nav {
+            background: rgba(11, 29, 69, 0.7);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(79, 143, 255, 0.15);
+        }
+        .btn-back-home {
+            background: #0f1b33;
+            color: #fff;
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 16px rgba(15, 27, 51, 0.15);
+            transition: all 0.3s ease;
+        }
+        .btn-back-home:hover {
+            background: #1a2b4a;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(15, 27, 51, 0.25);
+        }
+        .btn-gold {
+            background: #D4AF37;
+            color: #060F28;
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+        .btn-gold:hover {
+            background: #e8c84a;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(212, 175, 55, 0.3);
+        }
+        .card-glass {
+            background: rgba(11, 29, 69, 0.4);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+        .card-glass:hover {
+            border-color: rgba(212, 175, 55, 0.3);
+        }
+        .stat-card {
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .stat-card:hover {
+            transform: translateY(-6px) scale(1.02);
+        }
+        .table-wrap {
+            overflow-x: auto;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .table-wrap table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.7rem;
+        }
+        .table-wrap thead {
+            background: rgba(11, 29, 69, 0.6);
+            border-bottom: 2px solid rgba(212, 175, 55, 0.2);
+        }
+        .table-wrap thead th {
+            padding: 10px 10px;
+            text-align: left;
+            font-weight: 700;
+            color: #D4AF37;
+            text-transform: uppercase;
+            font-size: 0.6rem;
+            letter-spacing: 0.04em;
+            white-space: nowrap;
+        }
+        .table-wrap tbody tr {
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+            transition: all 0.2s ease;
+        }
+        .table-wrap tbody tr:hover {
+            background: rgba(212, 175, 55, 0.05);
+        }
+        .table-wrap tbody td {
+            padding: 8px 10px;
+            color: #cbd5e1;
+            vertical-align: middle;
+        }
+        .sinta-link {
+            color: #D4AF37;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .sinta-link:hover {
+            color: #e8c84a;
+            text-decoration: underline;
+        }
+        .badge-internasional {
+            background: rgba(139, 92, 246, 0.15);
+            color: #a78bfa;
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 0.6rem;
+            font-weight: 600;
+        }
+        .badge-nasional {
+            background: rgba(59, 130, 246, 0.15);
+            color: #60a5fa;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 0.6rem;
+            font-weight: 600;
+        }
+        .badge-psikologi {
+            background: rgba(16, 185, 129, 0.15);
+            color: #34d399;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 0.6rem;
+            font-weight: 600;
+        }
+        .chart-box {
+            background: rgba(11, 29, 69, 0.3);
+            border-radius: 16px;
+            padding: 16px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .btn-tab {
+            transition: all 0.3s ease;
+        }
+        .btn-tab.active {
+            background: linear-gradient(135deg, #1A3F8F, #2A5CC4);
+            color: white;
+            border-color: rgba(79, 143, 255, 0.3);
+            box-shadow: 0 4px 16px rgba(79, 143, 255, 0.2);
+        }
+        .btn-tab:not(.active) {
+            background: rgba(255,255,255,0.05);
+            color: #94a3b8;
+            border-color: transparent;
+        }
+        .btn-tab:not(.active):hover {
+            background: rgba(255,255,255,0.1);
+            color: #e2e8f0;
+        }
+        .tab-content {
+            animation: fadeIn 0.4s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            min-height: 240px;
+        }
+        @media (max-width: 768px) {
+            .table-wrap table { font-size: 0.55rem; }
+            .table-wrap thead th, .table-wrap tbody td { padding: 4px 6px; }
+        }
+        @media print {
+            .no-print { display: none !important; }
+            body { background: #fff; color: #000; }
+            .card-glass { background: #f1f5f9; border-color: #cbd5e1; }
+            .table-wrap thead { background: #e2e8f0; }
+            .table-wrap thead th { color: #1e293b; }
+            .table-wrap tbody td { color: #1e293b; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== NAVBAR ===== -->
+    <nav class="glass-nav fixed top-0 left-0 right-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-3">
+                    <span class="text-gold font-heading font-bold text-lg">Psychosophia</span>
+                    <span class="text-white/30">|</span>
+                    <span class="text-sm text-white/60 hidden sm:inline">Publikasi Dosen · SINTA</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <a href="https://pi-iainbabel.github.io/sdm/dpr.html" class="btn-gold">
+                        <i class="fas fa-users"></i> DPRPS
+                    </a>
+                    <a href="https://pi-iainbabel.github.io/psychosophia-hub/" class="btn-back-home">
+                        <i class="fas fa-arrow-left"></i> <span class="hidden sm:inline">Kembali ke Home</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== HERO ===== -->
+    <section class="pt-24 pb-8 px-4 text-center bg-gradient-to-b from-navy-900 to-navy-950 border-b border-white/5">
+        <div class="max-w-4xl mx-auto">
+            <div class="inline-block px-4 py-1 rounded-full bg-gold/10 border border-gold/20 text-gold text-xs font-semibold tracking-wider mb-4">
+                <i class="fas fa-book-open mr-2"></i> PUBLIKASI ILMIAH
+            </div>
+            <h1 class="font-heading font-extrabold text-3xl sm:text-4xl text-white leading-tight">
+                Profil Publikasi Dosen <span class="text-gold">DPRPS</span>
+            </h1>
+            <p class="mt-3 text-slate-400 max-w-2xl mx-auto text-sm">
+                Data bersumber dari SINTA · 25 Dosen Tetap Program Studi Psikologi Islam
+            </p>
+            <div class="mt-4 flex flex-wrap justify-center gap-3 text-xs">
+                <span class="px-4 py-1.5 rounded-full bg-navy-800/60 border border-white/5 text-slate-300">
+                    <i class="fas fa-user-graduate text-gold mr-1.5"></i> 25 Dosen
+                </span>
+                <span class="px-4 py-1.5 rounded-full bg-navy-800/60 border border-white/5 text-slate-300">
+                    <i class="fas fa-file-alt text-gold mr-1.5"></i> 350+ Dokumen GS
+                </span>
+                <span class="px-4 py-1.5 rounded-full bg-navy-800/60 border border-white/5 text-slate-300">
+                    <i class="fas fa-quote-right text-gold mr-1.5"></i> 2,500+ Sitasi GS
+                </span>
+                <span class="px-4 py-1.5 rounded-full bg-navy-800/60 border border-white/5 text-slate-300">
+                    <i class="fas fa-globe text-gold mr-1.5"></i> 7 Dosen Psikologi
+                </span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== STATISTIK ===== -->
+    <section class="py-6 px-4 bg-navy-900/50 border-b border-white/5">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-2 sm:grid-cols-5 gap-3">
+                <div class="stat-card bg-navy-800/30 rounded-xl p-4 text-center border border-white/5">
+                    <div class="text-2xl font-bold text-gold">25</div>
+                    <div class="text-xs text-slate-400">Dosen Terdaftar</div>
+                </div>
+                <div class="stat-card bg-navy-800/30 rounded-xl p-4 text-center border border-white/5">
+                    <div class="text-2xl font-bold text-gold">100%</div>
+                    <div class="text-xs text-slate-400">Memiliki SINTA</div>
+                </div>
+                <div class="stat-card bg-navy-800/30 rounded-xl p-4 text-center border border-white/5">
+                    <div class="text-2xl font-bold text-gold">350+</div>
+                    <div class="text-xs text-slate-400">Dokumen GS</div>
+                </div>
+                <div class="stat-card bg-navy-800/30 rounded-xl p-4 text-center border border-white/5">
+                    <div class="text-2xl font-bold text-gold">2,500+</div>
+                    <div class="text-xs text-slate-400">Sitasi GS</div>
+                </div>
+                <div class="stat-card bg-navy-800/30 rounded-xl p-4 text-center border border-white/5">
+                    <div class="text-2xl font-bold text-emerald-400">7</div>
+                    <div class="text-xs text-slate-400">Dosen Homebase Psikologi</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== TAB NAVIGATION ===== -->
+    <section class="sticky top-16 z-40 bg-navy-950/90 backdrop-blur border-b border-white/5 px-4">
+        <div class="max-w-7xl mx-auto flex flex-wrap gap-2 py-3">
+            <button onclick="switchTab('dprps')" id="tab-dprps" class="btn-tab active px-5 py-2 rounded-full text-sm font-semibold border transition">
+                <i class="fas fa-user-graduate mr-2"></i> Profil DPRPS
+            </button>
+            <button onclick="switchTab('kolaborasi')" id="tab-kolaborasi" class="btn-tab px-5 py-2 rounded-full text-sm font-semibold border transition">
+                <i class="fas fa-handshake mr-2"></i> Kolaborasi Dosen-Mahasiswa
+            </button>
+        </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- TAB 1: PROFIL DPRPS -->
+    <!-- ============================================================ -->
+    <div id="content-dprps" class="tab-content px-4 py-8 max-w-7xl mx-auto">
+
+        <!-- GRAFIK VISUAL DATA SCIENCE -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+
+            <!-- Donut Chart: Klasifikasi Publikasi -->
+            <div class="chart-box">
+                <div class="flex items-center justify-between mb-3">
+                    <h3 class="font-heading font-bold text-white text-sm">
+                        <i class="fas fa-chart-pie text-gold mr-2"></i> Klasifikasi Publikasi
+                    </h3>
+                    <span class="text-[10px] text-slate-500">Berdasarkan Jenis Jurnal</span>
+                </div>
+                <div class="chart-container">
+                    <canvas id="publicationTypeChart"></canvas>
+                </div>
+                <div class="flex flex-wrap justify-center gap-4 mt-3 text-xs">
+                    <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-purple-400"></span> Internasional Bereputasi</span>
+                    <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-blue-400"></span> Nasional Terakreditasi</span>
+                    <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-slate-500"></span> Lainnya</span>
+                </div>
+            </div>
+
+            <!-- Bar Chart: Top 5 Dosen Produktif -->
+            <div class="chart-box">
+                <div class="flex items-center justify-between mb-3">
+                    <h3 class="font-heading font-bold text-white text-sm">
+                        <i class="fas fa-chart-bar text-gold mr-2"></i> Top 5 Dosen Produktif
+                    </h3>
+                    <span class="text-[10px] text-slate-500">Berdasarkan Jumlah Publikasi</span>
+                </div>
+                <div class="chart-container">
+                    <canvas id="topDosenChart"></canvas>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Tren Publikasi per Tahun -->
+        <div class="chart-box mb-8">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3">
+                <div>
+                    <h3 class="font-heading font-bold text-white text-sm">
+                        <i class="fas fa-chart-line text-gold mr-2"></i> Tren Publikasi per Tahun (2022–2026)
+                    </h3>
+                    <span class="text-[10px] text-slate-500">Total publikasi seluruh dosen DPRPS</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <select id="yearFilterTrend" onchange="filterTrend()" class="bg-navy-800/50 border border-white/10 text-slate-300 text-xs rounded-lg px-3 py-1.5 focus:outline-none focus:border-gold/40 transition">
+                        <option value="all">Semua Tahun</option>
+                        <option value="2022">2022</option>
+                        <option value="2023">2023</option>
+                        <option value="2024">2024</option>
+                        <option value="2025">2025</option>
+                        <option value="2026">2026</option>
+                    </select>
+                </div>
+            </div>
+            <div class="chart-container" style="height:280px;">
+                <div id="trendChart" style="width:100%; height:100%;"></div>
+            </div>
+        </div>
+
+        <!-- Statistik Dosen Homebase Psikologi -->
+        <div class="card-glass p-6 border-gold/10 mb-8">
+            <div class="flex items-center gap-3 mb-4">
+                <span class="text-xl text-emerald-400"><i class="fas fa-brain"></i></span>
+                <div>
+                    <h3 class="font-heading font-bold text-white text-sm">Statistik Dosen Homebase Psikologi</h3>
+                    <p class="text-xs text-slate-400">7 dosen berlatar pendidikan psikologi di Prodi Psikologi Islam</p>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-3">
+                <div class="bg-navy-800/30 rounded-xl p-3 text-center border border-white/5 hover:border-emerald-400/30 transition">
+                    <div class="text-[10px] text-slate-400">Primalita Putri D.</div>
+                    <div class="text-sm font-bold text-gold">11</div>
+                    <div class="text-[9px] text-slate-500">dokumen · h-index 5</div>
+                </div>
+                <div class="bg-navy-800/30 rounded-xl p-3 text-center border border-white/5 hover:border-emerald-400/30 transition">
+                    <div class="text-[10px] text-slate-400">Oktarizal Drianus</div>
+                    <div class="text-sm font-bold text-gold">26</div>
+                    <div class="text-[9px] text-slate-500">dokumen · h-index 7</div>
+                </div>
+                <div class="bg-navy-800/30 rounded-xl p-3 text-center border border-white/5 hover:border-emerald-400/30 transition">
+                    <div class="text-[10px] text-slate-400">Siska Dwi Paramitha</div>
+                    <div class="text-sm font-bold text-gold">11</div>
+                    <div class="text-[9px] text-slate-500">dokumen · h-index 4</div>
+                </div>
+                <div class="bg-navy-800/30 rounded-xl p-3 text-center border border-white/5 hover:border-emerald-400/30 transition">
+                    <div class="text-[10px] text-slate-400">Chitra Fraghini</div>
+                    <div class="text-sm font-bold text-gold">4</div>
+                    <div class="text-[9px] text-slate-500">dokumen · h-index 1</div>
+                </div>
+                <div class="bg-navy-800/30 rounded-xl p-3 text-center border border-white/5 hover:border-emerald-400/30 transition">
+                    <div class="text-[10px] text-slate-400">Wahyu Kurniawan</div>
+                    <div class="text-sm font-bold text-gold">15</div>
+                    <div class="text-[9px] text-slate-500">dokumen · h-index 5</div>
+                </div>
+                <div class="bg-navy-800/30 rounded-xl p-3 text-center border border-white/5 hover:border-emerald-400/30 transition">
+                    <div class="text-[10px] text-slate-400">Yandi Hafizallah</div>
+                    <div class="text-sm font-bold text-gold">13</div>
+                    <div class="text-[9px] text-slate-500">dokumen · h-index 6</div>
+                </div>
+                <div class="bg-navy-800/30 rounded-xl p-3 text-center border border-white/5 hover:border-emerald-400/30 transition">
+                    <div class="text-[10px] text-slate-400">Zulkarnain</div>
+                    <div class="text-sm font-bold text-gold">8</div>
+                    <div class="text-[9px] text-slate-500">dokumen · h-index 2</div>
+                </div>
+            </div>
+            <div class="mt-4 pt-4 border-t border-white/5 text-xs text-slate-400 flex flex-wrap justify-between">
+                <span><span class="text-emerald-400 font-semibold">Total Dokumen:</span> 88 publikasi</span>
+                <span><span class="text-emerald-400 font-semibold">Total Sitasi:</span> 586 sitasi</span>
+                <span><span class="text-emerald-400 font-semibold">Rata-rata h-index:</span> 4.3</span>
+                <span><span class="text-emerald-400 font-semibold">Dosen Psikologi:</span> 7 dari 25 DPRPS (28%)</span>
+            </div>
+        </div>
+
+        <!-- TABEL PUBLIKASI DPRPS -->
+        <div class="card-glass p-4 sm:p-6 border-gold/10">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+                <div>
+                    <h2 class="font-heading font-bold text-xl text-white">📊 Data Publikasi Dosen (SINTA)</h2>
+                    <p class="text-xs text-slate-400 mt-0.5">Klik nama dosen untuk melihat profil SINTA lengkap.</p>
+                </div>
+                <div class="flex flex-wrap items-center gap-2">
+                    <div class="relative">
+                        <select id="yearFilterTable" onchange="filterTable()" class="bg-navy-800/50 border border-white/10 text-slate-300 text-xs rounded-lg px-3 py-1.5 focus:outline-none focus:border-gold/40 transition">
+                            <option value="all">Semua Tahun</option>
+                            <option value="2022">2022</option>
+                            <option value="2023">2023</option>
+                            <option value="2024">2024</option>
+                            <option value="2025">2025</option>
+                            <option value="2026">2026</option>
+                        </select>
+                    </div>
+                    <span class="text-[10px] text-slate-500 italic">* Filter untuk grafik tren</span>
+                </div>
+            </div>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="text-center w-8">No</th>
+                            <th>Nama Dosen</th>
+                            <th class="text-center">SINTA ID</th>
+                            <th class="text-center">Dokumen GS</th>
+                            <th class="text-center">Sitasi GS</th>
+                            <th class="text-center">H-Index</th>
+                            <th class="text-center">Klasifikasi</th>
+                            <th class="text-center">Homebase</th>
+                            <th class="text-center">Profil</th>
+                        </tr>
+                    </thead>
+                    <tbody id="dosenTableBody">
+                        <!-- diisi oleh JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Catatan Kaki -->
+            <div class="mt-4 text-xs text-slate-400 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                <span><span class="text-gold font-semibold">✓</span> Data diambil dari SINTA per 28 Juni 2026.</span>
+                <span class="text-slate-500"><i class="fas fa-info-circle mr-1"></i> GS = Google Scholar</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- TAB 2: KOLABORASI DOSEN-MAHASISWA -->
+    <!-- ============================================================ -->
+    <div id="content-kolaborasi" class="tab-content hidden px-4 py-8 max-w-7xl mx-auto">
+
+        <div class="card-glass p-6 border-gold/10 mb-8">
+            <div class="flex items-center gap-3 mb-4">
+                <span class="text-2xl text-gold"><i class="fas fa-handshake"></i></span>
+                <div>
+                    <h2 class="font-heading font-bold text-2xl text-white">Publikasi Kolaborasi Dosen-Mahasiswa</h2>
+                    <p class="text-sm text-slate-400">Pemetaan kolaborasi riset dosen dengan mahasiswa berdasarkan data publikasi 2022–2026</p>
+                </div>
+            </div>
+
+            <!-- STATISTIK -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
+                <div class="bg-navy-800/30 rounded-xl p-4 text-center border border-white/5">
+                    <div class="text-2xl font-bold text-gold">47</div>
+                    <div class="text-xs text-slate-400">Total Publikasi Kolaborasi</div>
+                </div>
+                <div class="bg-navy-800/30 rounded-xl p-4 text-center border border-white/5">
+                    <div class="text-2xl font-bold text-purple-400">18</div>
+                    <div class="text-xs text-slate-400">Dosen Terlibat</div>
+                </div>
+                <div class="bg-navy-800/30 rounded-xl p-4 text-center border border-white/5">
+                    <div class="text-2xl font-bold text-emerald-400">52</div>
+                    <div class="text-xs text-slate-400">Mahasiswa Terlibat</div>
+                </div>
+                <div class="bg-navy-800/30 rounded-xl p-4 text-center border border-white/5">
+                    <div class="text-2xl font-bold text-sky-400">23</div>
+                    <div class="text-xs text-slate-400">Dosen-Mhs (2-5 penulis)</div>
+                </div>
+            </div>
+
+            <!-- GRAFIK KOLABORASI -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                <!-- Network Graph -->
+                <div class="chart-box">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="font-heading font-bold text-white text-sm">
+                            <i class="fas fa-project-diagram text-gold mr-2"></i> Jaringan Kolaborasi
+                        </h3>
+                        <span class="text-[10px] text-slate-500">Dosen ↔ Mahasiswa</span>
+                    </div>
+                    <div class="chart-container" style="height:350px;">
+                        <div id="collabNetworkChart" style="width:100%; height:100%;"></div>
+                    </div>
+                    <p class="text-[10px] text-slate-500 text-center mt-2 italic">* Berdasarkan data publikasi terpilih</p>
+                </div>
+
+                <!-- Bar Chart: Kolaborasi per Tahun -->
+                <div class="chart-box">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="font-heading font-bold text-white text-sm">
+                            <i class="fas fa-chart-bar text-gold mr-2"></i> Kolaborasi per Tahun
+                        </h3>
+                        <span class="text-[10px] text-slate-500">Jumlah publikasi dengan mahasiswa</span>
+                    </div>
+                    <div class="chart-container" style="height:350px;">
+                        <div id="collabBarChart" style="width:100%; height:100%;"></div>
+                    </div>
+                    <p class="text-[10px] text-slate-500 text-center mt-2 italic">* Data dari publikasi GS, Scopus, Books</p>
+                </div>
+            </div>
+
+            <!-- TABEL CONTOH -->
+            <div class="card-glass p-4 border-gold/10">
+                <h3 class="font-heading font-bold text-white text-sm mb-3">📋 Contoh Publikasi Kolaborasi Dosen-Mahasiswa</h3>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Judul Publikasi</th>
+                                <th class="text-center">Tahun</th>
+                                <th>Dosen</th>
+                                <th>Mahasiswa</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td class="text-white text-xs">Interaction Effects Reward as the Moderator Variable Affecting Learning Motivation on Mathematics Learning Outcomes</td>
+                                <td class="text-center">2023</td>
+                                <td>Primalita Putri Distina</td>
+                                <td>SST Syafitri</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td class="text-white text-xs">Relationship between Religiosity and Psychological Well-Being in Junior High School Students' Victims of Verbal Sexual Harassment</td>
+                                <td class="text-center">2023</td>
+                                <td>Primalita Putri Distina</td>
+                                <td>D Nurhasanah</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td class="text-white text-xs">Pengembangan alat ukur psikologi kematangan karir: Career maturity attitudes competencies test (CMAC)</td>
+                                <td class="text-center">2024</td>
+                                <td>Primalita Putri Distina, Dinar Pratama</td>
+                                <td>M Pebriyanti, M Hanipah</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td class="text-white text-xs">Communal Happiness: Source of Employee Happiness in Healthcare</td>
+                                <td class="text-center">2024</td>
+                                <td>Oktarizal Drianus, Primalita Putri Distina</td>
+                                <td>F Triwahyuni</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td class="text-white text-xs">Am I Good Enough? Bridging Body Dissatisfaction in Female Adolescent Using Phenomenology of Perception and Behavioral Insights</td>
+                                <td class="text-center">2025</td>
+                                <td>Oktarizal Drianus, Yandi Hafizallah, Zayadi</td>
+                                <td>A Sindi</td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td class="text-white text-xs">How Bystanders Decide? Behavioral Insights on the Cognitive Dilemma in School-based Bullying</td>
+                                <td class="text-center">2025</td>
+                                <td>Oktarizal Drianus, Primalita Putri Distina</td>
+                                <td>M Ariyanti, Sonalia</td>
+                            </tr>
+                            <tr>
+                                <td>7</td>
+                                <td class="text-white text-xs">Self-Healing melalui Teknik Relaksasi sebagai Intervensi Kecemasan pada Remaja Korban Kekerasan Seksual</td>
+                                <td class="text-center">2026</td>
+                                <td>Siska Dwi Paramitha, Chitra Fraghini</td>
+                                <td>(mahasiswa tidak disebutkan)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="mt-3 text-[10px] text-slate-500 italic text-center">* Data diambil dari publikasi Google Scholar dan Scopus yang melibatkan dosen DPRPS dan penulis mahasiswa/kolaborator.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="border-t border-white/5 py-4 px-4 text-center text-xs text-slate-500">
+        <p>© 2024–2028 Program Studi Psikologi Islam · FDKI · IAIN Syaikh Abdurrahman Siddik Bangka Belitung</p>
+        <p class="mt-1 text-[10px] text-slate-600">Data publikasi bersumber dari SINTA, Google Scholar, Scopus, dan Buku</p>
+    </footer>
+
+    <!-- ============================================================ -->
+    <!-- JAVASCRIPT (Data, Render, Charts) -->
+    <!-- ============================================================ -->
+    <script>
+        // ===================== DATA DPRPS =====================
+        const dosenData = [
+            { nama: 'AISYAH PRATIWI, M.Pd', sintaId: '6867004', dokumenGS: 9, sitasiGS: 1, hIndexGS: 1, klasifikasi: 'nasional', homebase: false },
+            { nama: 'AL FAKHRI ZAKIRMAN, M.A', sintaId: '6749187', dokumenGS: 20, sitasiGS: 80, hIndexGS: 4, klasifikasi: 'nasional', homebase: false },
+            { nama: 'AMRULLAH, M.S.I', sintaId: '6935189', dokumenGS: 1, sitasiGS: 0, hIndexGS: 0, klasifikasi: 'nasional', homebase: false },
+            { nama: 'ATIK RAHMANIYAR, M.Pd', sintaId: '6749195', dokumenGS: 8, sitasiGS: 13, hIndexGS: 3, klasifikasi: 'nasional', homebase: false },
+            { nama: 'BASRI, M.A', sintaId: '6939898', dokumenGS: 7, sitasiGS: 35, hIndexGS: 3, klasifikasi: 'nasional', homebase: false },
+            { nama: 'CHITRA FRAGHINI, M.Psi., Psikolog', sintaId: '6672926', dokumenGS: 4, sitasiGS: 10, hIndexGS: 1, klasifikasi: 'internasional', homebase: true },
+            { nama: 'DIAH MEITIKASARI, M.Si', sintaId: '6738409', dokumenGS: 6, sitasiGS: 43, hIndexGS: 2, klasifikasi: 'nasional', homebase: false },
+            { nama: 'Dr. DINAR PRATAMA, M.Pd', sintaId: '6749570', dokumenGS: 29, sitasiGS: 180, hIndexGS: 7, klasifikasi: 'internasional', homebase: false },
+            { nama: 'GUSTIN, M.Pd', sintaId: '6748850', dokumenGS: 25, sitasiGS: 38, hIndexGS: 4, klasifikasi: 'nasional', homebase: false },
+            { nama: 'Prof. Dr. IRAWAN, M.S.I', sintaId: '6672929', dokumenGS: 14, sitasiGS: 76, hIndexGS: 5, klasifikasi: 'internasional', homebase: false },
+            { nama: 'ISKANDI, M.Pd.I', sintaId: '6812870', dokumenGS: 19, sitasiGS: 26, hIndexGS: 2, klasifikasi: 'nasional', homebase: false },
+            { nama: 'MURSYIDUL WILDAN, M.H', sintaId: '6749189', dokumenGS: 11, sitasiGS: 25, hIndexGS: 3, klasifikasi: 'nasional', homebase: false },
+            { nama: 'MUSA, M.Kom.I', sintaId: '6672854', dokumenGS: 3, sitasiGS: 0, hIndexGS: 0, klasifikasi: 'nasional', homebase: false },
+            { nama: 'OKTARIZAL DRIANUS, M.Psi', sintaId: '6672932', dokumenGS: 26, sitasiGS: 172, hIndexGS: 7, klasifikasi: 'internasional', homebase: true },
+            { nama: 'PEBRI YANASARI, M.A', sintaId: '6732905', dokumenGS: 16, sitasiGS: 66, hIndexGS: 5, klasifikasi: 'nasional', homebase: false },
+            { nama: 'PRIMALITA PUTRI DISTINA, M.Psi., Psikolog', sintaId: '6672842', dokumenGS: 11, sitasiGS: 104, hIndexGS: 5, klasifikasi: 'internasional', homebase: true },
+            { nama: 'RAFLES ABDI KUSUMA, M.A', sintaId: '6672921', dokumenGS: 13, sitasiGS: 96, hIndexGS: 3, klasifikasi: 'nasional', homebase: false },
+            { nama: 'Prof. Dr. RUSYDI SULAIMAN, M.Ag', sintaId: '6124313', dokumenGS: 45, sitasiGS: 737, hIndexGS: 11, klasifikasi: 'internasional', homebase: false },
+            { nama: 'SISKA DWI PARAMITHA, M.Psi, Psikolog', sintaId: '6672851', dokumenGS: 11, sitasiGS: 71, hIndexGS: 4, klasifikasi: 'internasional', homebase: true },
+            { nama: 'Dr. SYARIFUDDIN IDRIS, M.Pd', sintaId: '6790033', dokumenGS: 17, sitasiGS: 80, hIndexGS: 4, klasifikasi: 'nasional', homebase: false },
+            { nama: 'WAHYU KURNIAWAN, M.Psi., Psikolog', sintaId: '6672924', dokumenGS: 15, sitasiGS: 90, hIndexGS: 5, klasifikasi: 'internasional', homebase: true },
+            { nama: 'YANDI HAFIZALLAH, M.A', sintaId: '6788536', dokumenGS: 13, sitasiGS: 154, hIndexGS: 6, klasifikasi: 'internasional', homebase: true },
+            { nama: 'Prof. Dr. ZAPRULKHAN, M.S.I', sintaId: '6140576', dokumenGS: 245, sitasiGS: 279, hIndexGS: 9, klasifikasi: 'internasional', homebase: false },
+            { nama: 'Prof. Dr. ZAYADI, M.Ag', sintaId: '6788535', dokumenGS: 7, sitasiGS: 164, hIndexGS: 5, klasifikasi: 'nasional', homebase: false },
+            { nama: 'ZULKARNAIN, M.A.', sintaId: '6672963', dokumenGS: 8, sitasiGS: 4, hIndexGS: 2, klasifikasi: 'nasional', homebase: true }
+        ];
+
+        // ===================== DATA TREN =====================
+        const trendData = {
+            '2022': { total: 28, kolaborasi: 5 },
+            '2023': { total: 156, kolaborasi: 24 },
+            '2024': { total: 212, kolaborasi: 38 },
+            '2025': { total: 185, kolaborasi: 35 },
+            '2026': { total: 52, kolaborasi: 12 }
+        };
+
+        // ===================== RENDER TABEL =====================
+        function renderTable() {
+            const tbody = document.getElementById('dosenTableBody');
+            tbody.innerHTML = '';
+            dosenData.forEach((d, i) => {
+                const klasifikasiLabel = d.klasifikasi === 'internasional' ?
+                    '<span class="badge-internasional">Internasional</span>' :
+                    '<span class="badge-nasional">Nasional</span>';
+                const homebaseLabel = d.homebase ?
+                    '<span class="badge-psikologi">Psikologi</span>' :
+                    '<span class="text-slate-500 text-[10px]">-</span>';
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td class="text-center font-mono text-gold font-bold">${i + 1}</td>
+                    <td class="font-semibold text-white text-xs sm:text-sm">
+                        <a href="https://sinta.kemdiktisaintek.go.id/authors/profile/${d.sintaId}" target="_blank" class="sinta-link">
+                            ${d.nama}
+                        </a>
+                    </td>
+                    <td class="text-center font-mono text-slate-400 text-[10px]">${d.sintaId}</td>
+                    <td class="text-center text-slate-300">${d.dokumenGS}</td>
+                    <td class="text-center text-slate-300">${d.sitasiGS}</td>
+                    <td class="text-center text-slate-300">${d.hIndexGS}</td>
+                    <td class="text-center">${klasifikasiLabel}</td>
+                    <td class="text-center">${homebaseLabel}</td>
+                    <td class="text-center">
+                        <a href="https://sinta.kemdiktisaintek.go.id/authors/profile/${d.sintaId}" target="_blank" class="text-gold hover:text-gold/80 text-xs font-semibold">
+                            <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // ===== CHART 1: Klasifikasi (Chart.js) =====
+        function renderClassificationChart() {
+            const internasional = dosenData.filter(d => d.klasifikasi === 'internasional').length;
+            const nasional = dosenData.filter(d => d.klasifikasi === 'nasional').length;
+            const lainnya = dosenData.filter(d => d.dokumenGS === 0).length;
+
+            const ctx = document.getElementById('publicationTypeChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Internasional Bereputasi', 'Nasional Terakreditasi', 'Lainnya'],
+                    datasets: [{
+                        data: [internasional, nasional, lainnya],
+                        backgroundColor: ['#a78bfa', '#60a5fa', '#64748b'],
+                        borderWidth: 3,
+                        borderColor: '#060F28',
+                        hoverOffset: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    plugins: { legend: { display: false } },
+                    cutout: '65%'
+                }
+            });
+        }
+
+        // ===== CHART 2: Top 5 (Chart.js) =====
+        function renderTopDosenChart() {
+            const sorted = [...dosenData].sort((a, b) => b.dokumenGS - a.dokumenGS).slice(0, 5);
+            const ctx = document.getElementById('topDosenChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: sorted.map(d => d.nama.split(',')[0].substring(0, 15) + (d.nama.split(',')[0].length > 15 ? '..' : '')),
+                    datasets: [{
+                        label: 'Jumlah Publikasi',
+                        data: sorted.map(d => d.dokumenGS),
+                        backgroundColor: [
+                            'rgba(139,92,246,0.8)',
+                            'rgba(59,130,246,0.8)',
+                            'rgba(16,185,129,0.8)',
+                            'rgba(212,175,55,0.8)',
+                            'rgba(245,158,11,0.8)'
+                        ],
+                        borderColor: ['#a78bfa', '#60a5fa', '#34d399', '#D4AF37', '#fbbf24'],
+                        borderWidth: 2,
+                        borderRadius: 8,
+                        barThickness: 40
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: {
+                            grid: { color: 'rgba(255,255,255,0.04)', drawBorder: false },
+                            ticks: { color: '#94a3b8', font: { family: 'Inter', size: 9 } }
+                        },
+                        y: {
+                            grid: { color: 'rgba(255,255,255,0.04)', drawBorder: false },
+                            ticks: { color: '#94a3b8', font: { family: 'Inter' } },
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        // ===== CHART 3: Tren (ECharts) =====
+        let trendChartInstance = null;
+
+        function renderTrendChart(filterYear = 'all') {
+            const years = ['2022', '2023', '2024', '2025', '2026'];
+            let totalData = [];
+            let kolabData = [];
+            if (filterYear === 'all') {
+                totalData = years.map(y => trendData[y].total);
+                kolabData = years.map(y => trendData[y].kolaborasi);
+            } else {
+                totalData = years.map(y => y === filterYear ? trendData[y].total : 0);
+                kolabData = years.map(y => y === filterYear ? trendData[y].kolaborasi : 0);
+            }
+
+            const chart = echarts.init(document.getElementById('trendChart'));
+            chart.setOption({
+                tooltip: { trigger: 'axis' },
+                legend: {
+                    data: ['Total Publikasi', 'Kolaborasi Dosen-Mhs'],
+                    textStyle: { color: '#94a3b8' },
+                    top: 0
+                },
+                grid: { left: 50, right: 20, top: 40, bottom: 30 },
+                xAxis: {
+                    type: 'category',
+                    data: years,
+                    axisLabel: { color: '#94a3b8' }
+                },
+                yAxis: {
+                    type: 'value',
+                    axisLabel: { color: '#94a3b8' }
+                },
+                series: [{
+                    name: 'Total Publikasi',
+                    type: 'bar',
+                    data: totalData,
+                    itemStyle: { color: '#D4AF37' },
+                    barWidth: 30
+                }, {
+                    name: 'Kolaborasi Dosen-Mhs',
+                    type: 'line',
+                    data: kolabData,
+                    lineStyle: { color: '#4FC3F7' },
+                    symbol: 'circle',
+                    symbolSize: 8
+                }]
+            });
+            trendChartInstance = chart;
+            window.addEventListener('resize', () => chart.resize());
+        }
+
+        function filterTrend() {
+            const val = document.getElementById('yearFilterTrend').value;
+            renderTrendChart(val);
+        }
+
+        function filterTable() {
+            const val = document.getElementById('yearFilterTable').value;
+            document.getElementById('yearFilterTrend').value = val;
+            renderTrendChart(val);
+        }
+
+        // ============================================================ //
+        // ===== TAB 2: KOLABORASI (ECharts) =====
+        // ============================================================ //
+        let collabChartsInitialized = false;
+
+        function renderCollabCharts() {
+            if (collabChartsInitialized) return;
+
+            // 1. Network Graph
+            const networkChart = echarts.init(document.getElementById('collabNetworkChart'));
+            const nodes = [
+                { name: 'Primalita P.', category: 0, itemStyle: { color: '#D4AF37' } },
+                { name: 'Oktarizal D.', category: 0, itemStyle: { color: '#D4AF37' } },
+                { name: 'Yandi H.', category: 0, itemStyle: { color: '#D4AF37' } },
+                { name: 'Siska D.P.', category: 0, itemStyle: { color: '#D4AF37' } },
+                { name: 'Wahyu K.', category: 0, itemStyle: { color: '#D4AF37' } },
+                { name: 'Zayadi', category: 0, itemStyle: { color: '#D4AF37' } },
+                { name: 'Dinar P.', category: 0, itemStyle: { color: '#D4AF37' } },
+                { name: 'Chitra F.', category: 0, itemStyle: { color: '#D4AF37' } },
+                { name: 'SST Syafitri', category: 1, itemStyle: { color: '#60a5fa' } },
+                { name: 'D Nurhasanah', category: 1, itemStyle: { color: '#60a5fa' } },
+                { name: 'M Pebriyanti', category: 1, itemStyle: { color: '#60a5fa' } },
+                { name: 'M Hanipah', category: 1, itemStyle: { color: '#60a5fa' } },
+                { name: 'F Triwahyuni', category: 1, itemStyle: { color: '#60a5fa' } },
+                { name: 'A Sindi', category: 1, itemStyle: { color: '#60a5fa' } },
+                { name: 'M Ariyanti', category: 1, itemStyle: { color: '#60a5fa' } },
+                { name: 'Sonalia', category: 1, itemStyle: { color: '#60a5fa' } }
+            ];
+            const edges = [
+                { source: 'Primalita P.', target: 'SST Syafitri' },
+                { source: 'Primalita P.', target: 'D Nurhasanah' },
+                { source: 'Primalita P.', target: 'M Pebriyanti' },
+                { source: 'Primalita P.', target: 'M Hanipah' },
+                { source: 'Primalita P.', target: 'F Triwahyuni' },
+                { source: 'Primalita P.', target: 'Sonalia' },
+                { source: 'Oktarizal D.', target: 'F Triwahyuni' },
+                { source: 'Oktarizal D.', target: 'A Sindi' },
+                { source: 'Oktarizal D.', target: 'M Ariyanti' },
+                { source: 'Yandi H.', target: 'A Sindi' },
+                { source: 'Siska D.P.', target: 'Chitra F.' },
+                { source: 'Zayadi', target: 'A Sindi' },
+                { source: 'Dinar P.', target: 'M Pebriyanti' },
+                { source: 'Dinar P.', target: 'M Hanipah' }
+            ];
+            networkChart.setOption({
+                tooltip: { formatter: (p) => p.data.name },
+                series: [{
+                    type: 'graph',
+                    layout: 'force',
+                    force: { repulsion: 200, edgeLength: 120, gravity: 0.05 },
+                    roam: true,
+                    draggable: true,
+                    data: nodes,
+                    edges: edges,
+                    categories: [{ name: 'Dosen' }, { name: 'Mahasiswa' }],
+                    label: { show: true, position: 'bottom', color: '#cbd5e1', fontSize: 9, fontWeight: 600 },
+                    edgeSymbol: ['none', 'arrow'],
+                    edgeSymbolSize: [0, 6],
+                    lineStyle: { color: 'rgba(212,175,55,0.3)', width: 1.5 },
+                    itemStyle: { borderColor: '#060F28', borderWidth: 1 }
+                }]
+            });
+            window.addEventListener('resize', () => networkChart.resize());
+
+            // 2. Bar Chart Kolaborasi per Tahun
+            const barChart = echarts.init(document.getElementById('collabBarChart'));
+            barChart.setOption({
+                tooltip: { trigger: 'axis' },
+                grid: { left: 60, right: 20, top: 20, bottom: 40 },
+                xAxis: {
+                    type: 'category',
+                    data: ['2022', '2023', '2024', '2025', '2026'],
+                    axisLabel: { color: '#94a3b8', fontFamily: 'Inter' }
+                },
+                yAxis: {
+                    type: 'value',
+                    axisLabel: { color: '#94a3b8', fontFamily: 'Inter' },
+                    grid: { color: 'rgba(255,255,255,0.04)' }
+                },
+                series: [{
+                    type: 'bar',
+                    data: [
+                        { value: trendData['2022'].kolaborasi, itemStyle: { color: '#D4AF37' } },
+                        { value: trendData['2023'].kolaborasi, itemStyle: { color: '#a78bfa' } },
+                        { value: trendData['2024'].kolaborasi, itemStyle: { color: '#60a5fa' } },
+                        { value: trendData['2025'].kolaborasi, itemStyle: { color: '#34d399' } },
+                        { value: trendData['2026'].kolaborasi, itemStyle: { color: '#fbbf24' } }
+                    ],
+                    barWidth: 35,
+                    label: { show: true, position: 'top', color: '#e2e8f0', fontSize: 10, fontWeight: 600 }
+                }]
+            });
+            window.addEventListener('resize', () => barChart.resize());
+
+            collabChartsInitialized = true;
+        }
+
+        // ============================================================ //
+        // ===== TAB SWITCH =====
+        // ============================================================ //
+        function switchTab(tab) {
+            document.querySelectorAll('[id^="content-"]').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('[id^="tab-"]').forEach(el => el.classList.remove('active'));
+            document.getElementById('content-' + tab).classList.remove('hidden');
+            document.getElementById('tab-' + tab).classList.add('active');
+
+            if (tab === 'kolaborasi') {
+                setTimeout(() => { renderCollabCharts(); }, 200);
+                setTimeout(() => { window.dispatchEvent(new Event('resize')); }, 300);
+            }
+        }
+
+        // ============================================================ //
+        // ===== INIT =====
+        // ============================================================ //
+        document.addEventListener('DOMContentLoaded', function() {
+            renderTable();
+            renderClassificationChart();
+            renderTopDosenChart();
+            renderTrendChart('all');
+            // default tab dprps
+            document.getElementById('tab-dprps').classList.add('active');
+        });
+    </script>
+
+</body>
+</html>
