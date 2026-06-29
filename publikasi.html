@@ -250,9 +250,6 @@
                     <a href="https://pi-iainbabel.github.io/sdm/dpr.html" class="btn-gold">
                         <i class="fas fa-users"></i> DPRPS
                     </a>
-                    <a href="https://pi-iainbabel.github.io/riset-pkm/" class="btn-back-home">
-                        <i class="fas fa-arrow-left"></i> <span class="hidden sm:inline"> ke Roadmap Riset</span>
-                    </a>
                     <a href="https://pi-iainbabel.github.io/psychosophia-hub/" class="btn-back-home">
                         <i class="fas fa-arrow-left"></i> <span class="hidden sm:inline">Kembali ke Home</span>
                     </a>
@@ -278,7 +275,7 @@
                     <i class="fas fa-user-graduate text-gold mr-1.5"></i> 25 Dosen
                 </span>
                 <span class="px-4 py-1.5 rounded-full bg-navy-800/60 border border-white/5 text-slate-300">
-                    <i class="fas fa-file-alt text-gold mr-1.5"></i> 350+ Dokumen GS
+                    <i class="fas fa-file-alt text-gold mr-1.5"></i> 583+ Dokumen GS
                 </span>
                 <span class="px-4 py-1.5 rounded-full bg-navy-800/60 border border-white/5 text-slate-300">
                     <i class="fas fa-quote-right text-gold mr-1.5"></i> 2,500+ Sitasi GS
@@ -303,7 +300,7 @@
                     <div class="text-xs text-slate-400">Memiliki SINTA</div>
                 </div>
                 <div class="stat-card bg-navy-800/30 rounded-xl p-4 text-center border border-white/5">
-                    <div class="text-2xl font-bold text-gold">350+</div>
+                    <div class="text-2xl font-bold text-gold">583+</div>
                     <div class="text-xs text-slate-400">Dokumen GS</div>
                 </div>
                 <div class="stat-card bg-navy-800/30 rounded-xl p-4 text-center border border-white/5">
@@ -322,7 +319,7 @@
     <section class="sticky top-16 z-40 bg-navy-950/90 backdrop-blur border-b border-white/5 px-4">
         <div class="max-w-7xl mx-auto flex flex-wrap gap-2 py-3">
             <button onclick="switchTab('dprps')" id="tab-dprps" class="btn-tab active px-5 py-2 rounded-full text-sm font-semibold border transition">
-                <i class="fas fa-user-graduate mr-2"></i> Profil Publikasi DPRPS
+                <i class="fas fa-user-graduate mr-2"></i> Profil DPRPS
             </button>
             <button onclick="switchTab('kolaborasi')" id="tab-kolaborasi" class="btn-tab px-5 py-2 rounded-full text-sm font-semibold border transition">
                 <i class="fas fa-handshake mr-2"></i> Kolaborasi Dosen-Mahasiswa
@@ -338,22 +335,22 @@
         <!-- GRAFIK VISUAL DATA SCIENCE -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
 
-            <!-- Donut Chart: Klasifikasi Publikasi -->
+            <!-- Donut Chart: Klasifikasi Publikasi (berdasarkan data riil Scopus) -->
             <div class="chart-box">
                 <div class="flex items-center justify-between mb-3">
                     <h3 class="font-heading font-bold text-white text-sm">
                         <i class="fas fa-chart-pie text-gold mr-2"></i> Klasifikasi Publikasi
                     </h3>
-                    <span class="text-[10px] text-slate-500">Berdasarkan Jenis Jurnal</span>
+                    <span class="text-[10px] text-slate-500">Berdasarkan Data Scopus &amp; GS</span>
                 </div>
                 <div class="chart-container">
                     <canvas id="publicationTypeChart"></canvas>
                 </div>
                 <div class="flex flex-wrap justify-center gap-4 mt-3 text-xs">
-                    <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-purple-400"></span> Internasional Bereputasi</span>
-                    <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-blue-400"></span> Nasional Terakreditasi</span>
-                    <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-slate-500"></span> Lainnya</span>
+                    <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-purple-400"></span> Internasional (Scopus)</span>
+                    <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-blue-400"></span> Nasional (GS lainnya)</span>
                 </div>
+                <p class="text-center text-[10px] text-slate-500 mt-2">Total 583 publikasi · 24 Scopus · 559 GS Nasional</p>
             </div>
 
             <!-- Bar Chart: Top 5 Dosen Produktif -->
@@ -482,7 +479,7 @@
                             <th class="text-center">Dokumen GS</th>
                             <th class="text-center">Sitasi GS</th>
                             <th class="text-center">H-Index</th>
-                            <th class="text-center">Klasifikasi</th>
+                            <th class="text-center">Klasifikasi (Dosen)</th>
                             <th class="text-center">Homebase</th>
                             <th class="text-center">Profil</th>
                         </tr>
@@ -650,29 +647,32 @@
     <script>
         // ===================== DATA DPRPS =====================
         const dosenData = [
+            // ---- INTERNASIONAL (10 dosen) ----
+            { nama: 'CHITRA FRAGHINI, M.Psi., Psikolog', sintaId: '6672926', dokumenGS: 4, sitasiGS: 10, hIndexGS: 1, klasifikasi: 'internasional', homebase: true },
+            { nama: 'Dr. DINAR PRATAMA, M.Pd', sintaId: '6749570', dokumenGS: 29, sitasiGS: 180, hIndexGS: 7, klasifikasi: 'internasional', homebase: false },
+            { nama: 'Prof. Dr. IRAWAN, M.S.I', sintaId: '6672929', dokumenGS: 14, sitasiGS: 76, hIndexGS: 5, klasifikasi: 'internasional', homebase: false },
+            { nama: 'OKTARIZAL DRIANUS, M.Psi', sintaId: '6672932', dokumenGS: 26, sitasiGS: 172, hIndexGS: 7, klasifikasi: 'internasional', homebase: true },
+            { nama: 'PRIMALITA PUTRI DISTINA, M.Psi., Psikolog', sintaId: '6672842', dokumenGS: 11, sitasiGS: 104, hIndexGS: 5, klasifikasi: 'internasional', homebase: true },
+            { nama: 'Prof. Dr. RUSYDI SULAIMAN, M.Ag', sintaId: '6124313', dokumenGS: 45, sitasiGS: 737, hIndexGS: 11, klasifikasi: 'internasional', homebase: false },
+            { nama: 'SISKA DWI PARAMITHA, M.Psi, Psikolog', sintaId: '6672851', dokumenGS: 11, sitasiGS: 71, hIndexGS: 4, klasifikasi: 'internasional', homebase: true },
+            { nama: 'WAHYU KURNIAWAN, M.Psi., Psikolog', sintaId: '6672924', dokumenGS: 15, sitasiGS: 90, hIndexGS: 5, klasifikasi: 'internasional', homebase: true },
+            { nama: 'YANDI HAFIZALLAH, M.A', sintaId: '6788536', dokumenGS: 13, sitasiGS: 154, hIndexGS: 6, klasifikasi: 'internasional', homebase: true },
+            { nama: 'Prof. Dr. ZAPRULKHAN, M.S.I', sintaId: '6140576', dokumenGS: 245, sitasiGS: 279, hIndexGS: 9, klasifikasi: 'internasional', homebase: false },
+
+            // ---- NASIONAL (15 dosen sisanya) ----
             { nama: 'AISYAH PRATIWI, M.Pd', sintaId: '6867004', dokumenGS: 9, sitasiGS: 1, hIndexGS: 1, klasifikasi: 'nasional', homebase: false },
             { nama: 'AL FAKHRI ZAKIRMAN, M.A', sintaId: '6749187', dokumenGS: 20, sitasiGS: 80, hIndexGS: 4, klasifikasi: 'nasional', homebase: false },
             { nama: 'AMRULLAH, M.S.I', sintaId: '6935189', dokumenGS: 1, sitasiGS: 0, hIndexGS: 0, klasifikasi: 'nasional', homebase: false },
             { nama: 'ATIK RAHMANIYAR, M.Pd', sintaId: '6749195', dokumenGS: 8, sitasiGS: 13, hIndexGS: 3, klasifikasi: 'nasional', homebase: false },
             { nama: 'BASRI, M.A', sintaId: '6939898', dokumenGS: 7, sitasiGS: 35, hIndexGS: 3, klasifikasi: 'nasional', homebase: false },
-            { nama: 'CHITRA FRAGHINI, M.Psi., Psikolog', sintaId: '6672926', dokumenGS: 4, sitasiGS: 10, hIndexGS: 1, klasifikasi: 'internasional', homebase: true },
             { nama: 'DIAH MEITIKASARI, M.Si', sintaId: '6738409', dokumenGS: 6, sitasiGS: 43, hIndexGS: 2, klasifikasi: 'nasional', homebase: false },
-            { nama: 'Dr. DINAR PRATAMA, M.Pd', sintaId: '6749570', dokumenGS: 29, sitasiGS: 180, hIndexGS: 7, klasifikasi: 'internasional', homebase: false },
             { nama: 'GUSTIN, M.Pd', sintaId: '6748850', dokumenGS: 25, sitasiGS: 38, hIndexGS: 4, klasifikasi: 'nasional', homebase: false },
-            { nama: 'Prof. Dr. IRAWAN, M.S.I', sintaId: '6672929', dokumenGS: 14, sitasiGS: 76, hIndexGS: 5, klasifikasi: 'internasional', homebase: false },
             { nama: 'ISKANDI, M.Pd.I', sintaId: '6812870', dokumenGS: 19, sitasiGS: 26, hIndexGS: 2, klasifikasi: 'nasional', homebase: false },
             { nama: 'MURSYIDUL WILDAN, M.H', sintaId: '6749189', dokumenGS: 11, sitasiGS: 25, hIndexGS: 3, klasifikasi: 'nasional', homebase: false },
             { nama: 'MUSA, M.Kom.I', sintaId: '6672854', dokumenGS: 3, sitasiGS: 0, hIndexGS: 0, klasifikasi: 'nasional', homebase: false },
-            { nama: 'OKTARIZAL DRIANUS, M.Psi', sintaId: '6672932', dokumenGS: 26, sitasiGS: 172, hIndexGS: 7, klasifikasi: 'internasional', homebase: true },
             { nama: 'PEBRI YANASARI, M.A', sintaId: '6732905', dokumenGS: 16, sitasiGS: 66, hIndexGS: 5, klasifikasi: 'nasional', homebase: false },
-            { nama: 'PRIMALITA PUTRI DISTINA, M.Psi., Psikolog', sintaId: '6672842', dokumenGS: 11, sitasiGS: 104, hIndexGS: 5, klasifikasi: 'internasional', homebase: true },
             { nama: 'RAFLES ABDI KUSUMA, M.A', sintaId: '6672921', dokumenGS: 13, sitasiGS: 96, hIndexGS: 3, klasifikasi: 'nasional', homebase: false },
-            { nama: 'Prof. Dr. RUSYDI SULAIMAN, M.Ag', sintaId: '6124313', dokumenGS: 45, sitasiGS: 737, hIndexGS: 11, klasifikasi: 'internasional', homebase: false },
-            { nama: 'SISKA DWI PARAMITHA, M.Psi, Psikolog', sintaId: '6672851', dokumenGS: 11, sitasiGS: 71, hIndexGS: 4, klasifikasi: 'internasional', homebase: true },
             { nama: 'Dr. SYARIFUDDIN IDRIS, M.Pd', sintaId: '6790033', dokumenGS: 17, sitasiGS: 80, hIndexGS: 4, klasifikasi: 'nasional', homebase: false },
-            { nama: 'WAHYU KURNIAWAN, M.Psi., Psikolog', sintaId: '6672924', dokumenGS: 15, sitasiGS: 90, hIndexGS: 5, klasifikasi: 'internasional', homebase: true },
-            { nama: 'YANDI HAFIZALLAH, M.A', sintaId: '6788536', dokumenGS: 13, sitasiGS: 154, hIndexGS: 6, klasifikasi: 'internasional', homebase: true },
-            { nama: 'Prof. Dr. ZAPRULKHAN, M.S.I', sintaId: '6140576', dokumenGS: 245, sitasiGS: 279, hIndexGS: 9, klasifikasi: 'internasional', homebase: false },
             { nama: 'Prof. Dr. ZAYADI, M.Ag', sintaId: '6788535', dokumenGS: 7, sitasiGS: 164, hIndexGS: 5, klasifikasi: 'nasional', homebase: false },
             { nama: 'ZULKARNAIN, M.A.', sintaId: '6672963', dokumenGS: 8, sitasiGS: 4, hIndexGS: 2, klasifikasi: 'nasional', homebase: true }
         ];
@@ -721,20 +721,20 @@
             });
         }
 
-        // ===== CHART 1: Klasifikasi (Chart.js) =====
+        // ===== CHART 1: Klasifikasi (Chart.js) - berdasarkan DATA RIIL SCOPUS =====
         function renderClassificationChart() {
-            const internasional = dosenData.filter(d => d.klasifikasi === 'internasional').length;
-            const nasional = dosenData.filter(d => d.klasifikasi === 'nasional').length;
-            const lainnya = dosenData.filter(d => d.dokumenGS === 0).length;
+            // Data riil: 24 Scopus (Internasional), 559 GS lainnya (Nasional)
+            const internasional = 24;
+            const nasional = 583 - 24; // 559
 
             const ctx = document.getElementById('publicationTypeChart').getContext('2d');
             new Chart(ctx, {
                 type: 'doughnut',
                 data: {
-                    labels: ['Internasional Bereputasi', 'Nasional Terakreditasi', 'Lainnya'],
+                    labels: ['Internasional (Scopus)', 'Nasional (GS lainnya)'],
                     datasets: [{
-                        data: [internasional, nasional, lainnya],
-                        backgroundColor: ['#a78bfa', '#60a5fa', '#64748b'],
+                        data: [internasional, nasional],
+                        backgroundColor: ['#a78bfa', '#60a5fa'],
                         borderWidth: 3,
                         borderColor: '#060F28',
                         hoverOffset: 6
@@ -979,6 +979,5 @@
             document.getElementById('tab-dprps').classList.add('active');
         });
     </script>
-
 </body>
 </html>
