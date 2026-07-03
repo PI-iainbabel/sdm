@@ -110,6 +110,47 @@
             transform: translateY(-2px);
             box-shadow: 0 8px 24px rgba(79, 127, 216, 0.15);
         }
+        .btn-dpr {
+            background: rgba(212, 175, 55, 0.08);
+            color: #D4AF37;
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 0.75rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+        .btn-dpr:hover {
+            background: rgba(212, 175, 55, 0.15);
+            border-color: #D4AF37;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(212, 175, 55, 0.15);
+        }
+        /* Tombol LKPS DPRPS */
+        .btn-lkps-dprps {
+            background: rgba(52, 168, 83, 0.12);
+            color: #34A853;
+            border: 1px solid rgba(52, 168, 83, 0.2);
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 0.75rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+        .btn-lkps-dprps:hover {
+            background: rgba(52, 168, 83, 0.2);
+            border-color: #34A853;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(52, 168, 83, 0.15);
+        }
 
         .breadcrumb {
             display: flex;
@@ -282,7 +323,7 @@
 <body>
 
     <!-- ========================================================== -->
-    <!-- NAVBAR DENGAN BREADCRUMB (Home & Tata Kelola di sini)     -->
+    <!-- NAVBAR DENGAN BREADCRUMB                                   -->
     <!-- ========================================================== -->
     <nav class="glass-nav fixed top-0 left-0 right-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -305,7 +346,7 @@
                     </span>
                 </div>
 
-                <!-- Tombol navigasi (HANYA Peta, Publikasi, EWMP) -->
+                <!-- Tombol navigasi -->
                 <div class="flex items-center gap-2 flex-wrap">
                     <!-- PETA (Pohon Pengetahuan) -->
                     <a href="https://pi-iainbabel.github.io/psychosophia-hub/struktur-konten.html" class="btn-nav btn-nav-tree" title="Pohon Pengetahuan">
@@ -318,6 +359,10 @@
                     <!-- EWMP Dosen -->
                     <a href="https://pi-iainbabel.github.io/sdm/" class="btn-gold">
                         <i class="fas fa-chart-bar"></i> EWMP Dosen
+                    </a>
+                    <!-- LKPS DPRPS (BARU) -->
+                    <a href="https://docs.google.com/spreadsheets/d/1ypXZVZ3rATjgG0O0HV0CyzOPMTjE2ncm/edit?gid=1892551507#gid=1892551507" target="_blank" class="btn-lkps-dprps" title="Buka LKPS DPRPS">
+                        <i class="fas fa-table"></i> LKPS DPRPS
                     </a>
                 </div>
 
@@ -351,6 +396,12 @@
                 </span>
                 <span class="px-4 py-1.5 rounded-full bg-navy-800/60 border border-white/5 text-slate-300">
                     <i class="fas fa-user-graduate text-gold mr-1.5"></i> 6 Dosen Tidak Tetap
+                </span>
+                <span class="px-4 py-1.5 rounded-full bg-navy-800/60 border border-white/5 text-slate-300">
+                    <i class="fas fa-table text-green-400 mr-1.5"></i>
+                    <a href="https://docs.google.com/spreadsheets/d/1ypXZVZ3rATjgG0O0HV0CyzOPMTjE2ncm/edit?gid=1892551507#gid=1892551507" target="_blank" class="hover:text-green-300 transition-colors">
+                        LKPS DPRPS →
+                    </a>
                 </span>
                 <span class="px-4 py-1.5 rounded-full bg-navy-800/60 border border-white/5 text-slate-300">
                     <i class="fas fa-file-alt text-gold mr-1.5"></i>
@@ -552,6 +603,16 @@
                    class="inline-flex items-center gap-2 text-blue-400 hover:text-white transition-colors text-sm font-medium">
                     <i class="fas fa-file-alt"></i> Publikasi Kolektif Dosen
                     <i class="fas fa-arrow-right text-xs"></i>
+                </a>
+                <a href="https://pi-iainbabel.github.io/sdm/"
+                   class="inline-flex items-center gap-2 text-gold hover:text-white transition-colors text-sm font-medium">
+                    <i class="fas fa-chart-bar"></i> EWMP Dosen
+                    <i class="fas fa-arrow-right text-xs"></i>
+                </a>
+                <a href="https://docs.google.com/spreadsheets/d/1ypXZVZ3rATjgG0O0HV0CyzOPMTjE2ncm/edit?gid=1892551507#gid=1892551507" target="_blank"
+                   class="inline-flex items-center gap-2 text-green-400 hover:text-white transition-colors text-sm font-medium">
+                    <i class="fas fa-table"></i> LKPS DPRPS
+                    <i class="fas fa-external-link-alt text-xs"></i>
                 </a>
             </div>
             <!-- Breadcrumb mini di footer -->
